@@ -28,7 +28,7 @@ export default async function Layout({ children }) {
 
   return (
     <>
-      <div className='w-full absolute top-0 left-0 -z-10 flex items-end justify-left'>
+      <div className='w-full flex items-end justify-left -mb-[10vw]'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={newsBanner.value.asset._ref}
@@ -37,7 +37,7 @@ export default async function Layout({ children }) {
       </div>
       <Client />
 
-      <Section className='pt-[20vw]'>
+      <Section>
         <h1 className='text-h1 text-center heading'>Upcoming Events</h1>
         {sortBy(
           events.filter(event => event.date >= today),

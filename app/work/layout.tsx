@@ -23,7 +23,7 @@ export default async function Work({ children }) {
 
   return (
     <>
-      <div className='w-full absolute top-0 left-0 -z-10 flex items-end justify-left'>
+      <div className='w-full'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={workBanner.value.asset._ref}
@@ -32,7 +32,7 @@ export default async function Work({ children }) {
       </div>
       {/*  header for categories */}
       <Client />
-      <div className='sm:flex w-full h-[calc(100vh-32px)] pt-[20vw]'>
+      <div className='sm:flex w-full h-[calc(100vh-32px)]'>
         <div className='w-full flex-none h-full overflow-y-auto flex flex-wrap'>
           <Works projects={projects} />
         </div>
