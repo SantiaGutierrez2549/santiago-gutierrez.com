@@ -166,6 +166,38 @@ export type AssetInfo = {
   description?: string;
 };
 
+export type Home = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  upcomingWorks?: Array<{
+    title?: string;
+    subtitle?: string;
+    info?: Content;
+    date?: string;
+    banner?: BannerInfo;
+    _key: string;
+  }>;
+  highlights?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "events";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "posts";
+  } | {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "projects";
+  }>;
+};
+
 export type Settings = {
   _id: string;
   _type: "settings";
@@ -243,7 +275,13 @@ export type About = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  bio: Array<{
+  bioShort: Array<{
+    _key: string;
+  } & Description>;
+  bioMedium: Array<{
+    _key: string;
+  } & Description>;
+  bioLong: Array<{
     _key: string;
   } & Description>;
   headshot: {
@@ -537,12 +575,6 @@ export type EventQueryResult = {
   slug: string;
   category: null;
 } | null;
-// Variable: servicesQuery
-// Query: *[_type == 'services']{ _id, banner, order, title, 'slug': slug.current }
-export type ServicesQueryResult = Array<never>;
-// Variable: serviceQuery
-// Query: *[_type == 'services' && slug.current == $slug][0]{  _id, banner, order, title, 'slug': slug.current, content}
-export type ServiceQueryResult = null;
 // Variable: projectsQuery
 // Query: *[_type == 'projects']{  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current}
 export type ProjectsQueryResult = Array<{
@@ -612,7 +644,13 @@ export type AboutQueryResult = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  bio: Array<{
+  bioShort: Array<{
+    _key: string;
+  } & Description>;
+  bioMedium: Array<{
+    _key: string;
+  } & Description>;
+  bioLong: Array<{
     _key: string;
   } & Description>;
   headshot: {
@@ -695,7 +733,13 @@ export type AboutSelectQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
-    bio: Array<{
+    bioShort: Array<{
+      _key: string;
+    } & Description>;
+    bioMedium: Array<{
+      _key: string;
+    } & Description>;
+    bioLong: Array<{
       _key: string;
     } & Description>;
     headshot: {
@@ -732,4 +776,59 @@ export type AboutSelectQueryResult = {
     };
   } | null>;
 };
+// Variable: homeQuery
+// Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]-> }
+export type HomeQueryResult = {
+  _id: string;
+  _type: "home";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  upcomingWorks?: Array<{
+    title?: string;
+    subtitle?: string;
+    info?: Content;
+    date?: string;
+    banner?: BannerInfo;
+    _key: string;
+  }>;
+  highlights: Array<{
+    _id: string;
+    _type: "events";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    subtitle?: string;
+    slug: Slug;
+    date: string;
+    banner?: BannerInfo;
+    content?: Content;
+  } | {
+    _id: string;
+    _type: "posts";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    subtitle?: string;
+    slug: Slug;
+    date: string;
+    banner?: BannerInfo;
+    content: Content;
+  } | {
+    _id: string;
+    _type: "projects";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
+    subtitle?: string;
+    slug: Slug;
+    type: "Chamber" | "Orchestra" | "Vocal";
+    date: string;
+    banner?: BannerInfo;
+    content?: Content;
+  }> | null;
+} | null;
 

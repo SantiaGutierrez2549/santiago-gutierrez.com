@@ -16,3 +16,4 @@ export const projectQuery = groq`*[_type == 'projects' && slug.current == $slug]
 }`
 export const aboutQuery = groq`*[_type == 'about'][0]`
 export const aboutSelectQuery = groq`{ 'value': *[_type == 'about'][0][$key] }`
+export const homeQuery = groq`*[_type == 'home'][0]{ ..., 'highlights': highlights[]-> }`

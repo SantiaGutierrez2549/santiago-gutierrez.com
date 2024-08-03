@@ -43,7 +43,22 @@ const about = defineType({
       type: 'image'
     }),
     defineField({
-      name: 'bio',
+      name: 'bioShort',
+      title: 'Bio (Short)',
+      type: 'array',
+      of: [{ type: 'description' }],
+      validation: rule => rule.required()
+    }),
+    defineField({
+      name: 'bioMedium',
+      title: 'Bio (Medium)',
+      type: 'array',
+      of: [{ type: 'description' }],
+      validation: rule => rule.required()
+    }),
+    defineField({
+      name: 'bioLong',
+      title: 'Bio (Long)',
       type: 'array',
       of: [{ type: 'description' }],
       validation: rule => rule.required()

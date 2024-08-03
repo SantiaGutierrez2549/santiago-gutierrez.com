@@ -14,7 +14,7 @@ export default function Client() {
   const yCount = (window.innerHeight * 0.33) / 10
   const xCount = window.innerWidth
   return (
-    <Reactive className='fixed top-[60px] left-0 h-[calc(70vh-60px)] w-screen -z-10'>
+    <Reactive className='h-[calc(70vh-60px)] w-screen -z-10 relative'>
       <Processing
         name='p'
         type='p2d'
@@ -55,9 +55,9 @@ export default function Client() {
           // make some noise with one line
 
           const lastCurve = _.range(xCount).map(() => 0)
-          const startIndex = Math.floor(((time / 10) % 1) * xCount)
 
           for (let y = 0; y < yCount; y++) {
+            const startIndex = Math.floor((((time / 10) * 4) % 1) * xCount)
             const randomWeights = props.randomWidths[y]
             let x = startIndex
             for (let i = 0; i < xCount; i++) {
@@ -71,45 +71,6 @@ export default function Client() {
               p.point(((p.width + 20) / xCount) * i - 10, lastCurve[x])
             }
           }
-          // const ctx: CanvasRenderingContext2D = p.drawingContext
-          // for (let y = 0; y < yCount; y++) {
-          //   // p.stroke(p.color(0, p.noise(time, y)))
-          //   // p.beginShape()
-          //   ctx.strokeStyle = 'black'
-          //   ctx.beginPath()
-          //   let thisBreak = props.randomWidths[y][thisBreakIndex] * count
-          //   let justMoved = true
-          //   for (let x = 0; x <= count; x++) {
-          //     if (y === 0) {
-          //       console.log('drawing', x)
-          //     }
-          //     const thisNoise =
-          //       p.noise(x * 2, y, time * 0.25 + y * 0.2) * multiplier[x]
-          //     const nextNoise = lastCurve[x] + thisNoise
-          //     if (justMoved) {
-          //       justMoved = false
-          //       ctx.moveTo(
-          //         (p.width / count) * x * 2,
-          //         ((nextNoise * p.height) / yCount) * 2
-          //       )
-          //     } else {
-          //       ctx.lineTo(
-          //         (p.width / count) * x * 2,
-          //         ((nextNoise * p.height) / yCount) * 2
-          //       )
-          //     }
-
-          //     lastCurve[x] = nextNoise
-          //     if (x > thisBreak) {
-          //       thisBreakIndex++
-          //       thisBreak = props.randomWidths[0][thisBreakIndex] * count
-          //       ctx.stroke()
-          //       justMoved = true
-          //       x += 3
-          //     }
-          //   }
-          //   p.endShape()
-          // }
         }}
       />
     </Reactive>

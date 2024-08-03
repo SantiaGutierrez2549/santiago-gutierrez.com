@@ -2,6 +2,7 @@ import event from './document/events'
 import post from './document/posts'
 import project from './document/projects'
 import about from './page/about'
+import home from './page/home'
 import settings from './page/settings'
 import assetInfo from './type/assetInfo'
 import bannerInfo from './type/bannerInfo'
@@ -14,7 +15,7 @@ import workInfo from './type/workInfo'
 
 const documents = [event, post, project]
 
-const pages = [about, settings]
+const pages = [about, settings, home]
 
 const types = [
   assetInfo,

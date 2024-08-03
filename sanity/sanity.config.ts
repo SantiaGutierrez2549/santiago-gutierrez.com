@@ -11,7 +11,8 @@ import { schema } from './schemas'
 
 const singletonDocuments = [
   { id: 'settings', title: 'Settings' },
-  { id: 'about', title: 'About' }
+  { id: 'about', title: 'About' },
+  { id: 'home', title: 'Home' }
 ]
 const sanityConfig = defineConfig({
   projectId,
