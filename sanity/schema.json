@@ -1223,7 +1223,23 @@
         },
         "optional": true
       },
+      "backgroundDarkColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "color"
+        },
+        "optional": true
+      },
       "foregroundColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "color"
+        },
+        "optional": true
+      },
+      "foregroundDarkColor": {
         "type": "objectAttribute",
         "value": {
           "type": "inline",

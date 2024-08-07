@@ -26,7 +26,9 @@ export default async function RootLayout({
   const style = {
     '--bg': formatColor(data?.backgroundColor!),
     '--bg2': formatColor(data?.backgroundAltColor!),
+    '--bgDark': formatColor(data?.backgroundDarkColor!),
     '--fg': formatColor(data?.foregroundColor!),
+    '--fgDark': formatColor(data?.foregroundDarkColor!),
     '--accent': formatColor(data?.accentColor!),
     '--accent2': formatColor(data?.accentAltColor!),
     '--body': `${data?.bodyFont?.name}`,

@@ -208,7 +208,9 @@ export type Settings = {
   inspiration?: string;
   backgroundColor?: Color;
   backgroundAltColor?: Color;
+  backgroundDarkColor?: Color;
   foregroundColor?: Color;
+  foregroundDarkColor?: Color;
   accentColor?: Color;
   accentAltColor?: Color;
   bodyFont?: FontInfo;
@@ -515,7 +517,9 @@ export type SettingsQueryResult = {
   inspiration?: string;
   backgroundColor?: Color;
   backgroundAltColor?: Color;
+  backgroundDarkColor?: Color;
   foregroundColor?: Color;
+  foregroundDarkColor?: Color;
   accentColor?: Color;
   accentAltColor?: Color;
   bodyFont?: FontInfo;

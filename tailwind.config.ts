@@ -35,7 +35,9 @@ const config: Config = {
         bg2: 'rgb(var(--bg2) / <alpha-value>)',
         fg: 'rgb(var(--fg) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
-        accent2: 'rgb(var(--accent2) / <alpha-value>)'
+        accent2: 'rgb(var(--accent2) / <alpha-value>)',
+        bgDark: 'rgb(var(--bgDark) / <alpha-value>)',
+        fgDark: 'rgb(var(--fgDark) / <alpha-value>)'
       },
       fontFamily: {
         body: 'var(--body)',

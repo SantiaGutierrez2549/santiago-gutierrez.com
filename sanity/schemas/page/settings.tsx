@@ -31,12 +31,30 @@ const settings = defineType({
       description: <div>The alternate background color of your site.</div>
     }),
     defineField({
+      name: 'backgroundDarkColor',
+      type: 'color',
+      options: {
+        disableAlpha: true
+      },
+      description: <div>The dark background color of your site.</div>
+    }),
+    defineField({
       name: 'foregroundColor',
       type: 'color',
       options: {
         disableAlpha: true
       },
       description: <div>The foreground (text) color of your site.</div>
+    }),
+    defineField({
+      name: 'foregroundDarkColor',
+      type: 'color',
+      options: {
+        disableAlpha: true
+      },
+      description: (
+        <div>The color of text over dark backgrounds on your site.</div>
+      )
     }),
     defineField({
       name: 'accentColor',

@@ -12,12 +12,12 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
 
   return (
     <>
-      <div className='sticky top-16 w-full flex justify-around z-10'>
+      <div className='sticky top-16 w-full flex justify-around z-10 bg-dark'>
         {['All', 'Chamber', 'Vocal', 'Orchestra'].map(ensemble => (
           <Link
             key={ensemble}
             href={`/work${ensemble === 'All' ? '' : `/${ensemble}`}`}
-            className={`rounded-lg p-2 w-fit bg-bg2 font-heading ${service === ensemble ? 'border border-accent font-bold' : ''}`}
+            className={`rounded-lg p-2 w-fit font-heading ${service === ensemble ? 'border border-accent font-bold' : ''}`}
             scroll={false}>
             {ensemble}
           </Link>
@@ -27,15 +27,15 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
       {projects
         .filter(project => !service || project.type === service)
         .map(project => (
-          <div className='w-full h-[300px] sm:p-8 p-2' key={project._id}>
+          <div className='w-full sm:p-8 p-2' key={project._id}>
             <div className='p-4 w-full h-full relative rounded-lg bg-bg2/50 overflow-hidden'>
               <Link
                 scroll={false}
                 href={`/work/${project.type}/${project.slug}`}
                 title={project.title}
-                className='h-full w-full absolute top-0 left-0'
+                className='h-full w-full absolute top-0 left-0 z-10'
               />
-              <div className='flex flex-col justify-center w-full h-full items-center'>
+              <div className='flex flex-col w-full h-full'>
                 <h2 className='rounded-lg p-1 text-h2 backdrop-blur w-fit'>
                   {project.title}
                 </h2>
@@ -43,7 +43,6 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
                   {project.subtitle}
                 </p>
               </div>
-              {project.banner && <BannerFrame banner={project.banner} />}
             </div>
           </div>
         ))}
