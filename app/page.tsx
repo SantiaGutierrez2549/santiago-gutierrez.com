@@ -33,14 +33,18 @@ export default async function Home() {
 
       <Section>
         <h2 className='text-h2'>Highlights</h2>
-        {homeInfo.highlights!.map(x => (
-          <LinkFrame
-            key={x._id}
-            title={x.title}
-            subtitle={x.subtitle!}
-            href=''
-          />
-        ))}
+        <div className='space-y-8'>
+          {homeInfo.highlights!.map((x, i) => (
+            <LinkFrame
+              key={x._id}
+              title={x.title}
+              subtitle={x.subtitle!}
+              href=''
+              banner={x.banner}
+              className={`aspect-square w-[400px] max-w-full ${i % 2 === 0 ? 'float-left' : 'float-right text-right'} bg-bg2 rounded-lg p-4`}
+            />
+          ))}
+        </div>
       </Section>
     </main>
   )

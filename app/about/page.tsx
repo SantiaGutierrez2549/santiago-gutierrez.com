@@ -19,29 +19,26 @@ export default async function About() {
     params: { key: 'bannerAbout' }
   })) as any
 
-  console.log(aboutBanner)
-
   return (
     <>
       <Client />
-      <div className='w-full h-[400px] absolute top-0 left-0 -z-10 flex items-end justify-left'>
+      <div className='w-full -z-10 flex items-end justify-left relative -mt-[30%] sm:-mb-[10%] -mb-[20%]'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={aboutBanner.value.asset._ref}
-          className='w-[60vw]'
+          className='w-full sm:w-[60vw]'
         />
       </div>
       <Section className='pt-[100px]'>
-        <div className='w-full px-2 flex flex-col items-end'>
+        <div className='w-full px-2 flex flex-col items-end'></div>
+        <div className='py-4 relative'>
           <SanityImageWrapper
             // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
             id={about.headshot!.asset!._ref}
-            className='w-[60vw] min-w-[min(200px,100vw)] rounded-lg'
+            className='float-right min-w-[min(200px,100vw)] rounded-lg w-full sm:w-1/2 mb-4 sm:m-4 sm:-top-20 sm:left-10 relative'
             height={800}
             width={800}
           />
-        </div>
-        <div className='py-4'>
           <PortableText value={about.bioShort!} />
         </div>
         {// map the array of work experiences to div elements to display them

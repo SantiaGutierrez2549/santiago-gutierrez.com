@@ -327,7 +327,8 @@ export type Projects = {
   title: string;
   subtitle?: string;
   slug: Slug;
-  type: "Orchestra" | "Chamber" | "Vocal";
+  type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations";
+  instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics">;
   date: string;
   banner?: BannerInfo;
   content?: Content;
@@ -576,15 +577,15 @@ export type EventQueryResult = {
   category: null;
 } | null;
 // Variable: projectsQuery
-// Query: *[_type == 'projects']{  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current}
+// Query: *[_type == 'projects']{  _id, title, subtitle, banner, date, type, 'slug': slug.current}
 export type ProjectsQueryResult = Array<{
   _id: string;
   title: string;
   subtitle: string | null;
   banner: BannerInfo | null;
   date: string;
+  type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
   slug: string;
-  category: null;
 }>;
 // Variable: projectQuery
 // Query: *[_type == 'projects' && slug.current == $slug][0]{  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current, content}
@@ -825,7 +826,8 @@ export type HomeQueryResult = {
     title: string;
     subtitle?: string;
     slug: Slug;
-    type: "Chamber" | "Orchestra" | "Vocal";
+    type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
+    instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
     date: string;
     banner?: BannerInfo;
     content?: Content;

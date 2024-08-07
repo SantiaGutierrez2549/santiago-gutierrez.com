@@ -1955,10 +1955,134 @@
             {
               "type": "string",
               "value": "Vocal"
+            },
+            {
+              "type": "string",
+              "value": "Arrangements & Orchestrations"
             }
           ]
         },
         "optional": false
+      },
+      "instrumentation": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "Open Instrumentation"
+              },
+              {
+                "type": "string",
+                "value": "Symphonic Percussion"
+              },
+              {
+                "type": "string",
+                "value": "Hand Percussion"
+              },
+              {
+                "type": "string",
+                "value": "Clarinet"
+              },
+              {
+                "type": "string",
+                "value": "Flute"
+              },
+              {
+                "type": "string",
+                "value": "Oboe"
+              },
+              {
+                "type": "string",
+                "value": "Bassoon"
+              },
+              {
+                "type": "string",
+                "value": "Trumpet"
+              },
+              {
+                "type": "string",
+                "value": "Horn"
+              },
+              {
+                "type": "string",
+                "value": "Trombone"
+              },
+              {
+                "type": "string",
+                "value": "Tuba"
+              },
+              {
+                "type": "string",
+                "value": "Violin"
+              },
+              {
+                "type": "string",
+                "value": "Viola"
+              },
+              {
+                "type": "string",
+                "value": "Cello"
+              },
+              {
+                "type": "string",
+                "value": "Contrabass"
+              },
+              {
+                "type": "string",
+                "value": "Drumset"
+              },
+              {
+                "type": "string",
+                "value": "Guitar"
+              },
+              {
+                "type": "string",
+                "value": "Saxophone"
+              },
+              {
+                "type": "string",
+                "value": "Voice"
+              },
+              {
+                "type": "string",
+                "value": "Soprano"
+              },
+              {
+                "type": "string",
+                "value": "Mezzo-Soprano"
+              },
+              {
+                "type": "string",
+                "value": "Alto"
+              },
+              {
+                "type": "string",
+                "value": "Tenor"
+              },
+              {
+                "type": "string",
+                "value": "Baritone"
+              },
+              {
+                "type": "string",
+                "value": "Bass"
+              },
+              {
+                "type": "string",
+                "value": "Countertenor"
+              },
+              {
+                "type": "string",
+                "value": "Electronics"
+              }
+            ]
+          }
+        },
+        "optional": true
       },
       "date": {
         "type": "objectAttribute",

@@ -2,8 +2,7 @@ import { sanityFetch } from '@/sanity/lib/fetch'
 import { aboutSelectQuery, projectsQuery } from '@/sanity/queries'
 import {
   AboutSelectQueryResult,
-  ProjectsQueryResult,
-  ServicesQueryResult
+  ProjectsQueryResult
 } from '@/sanity/sanity-types'
 import WorksHeader from './header'
 import Client from './client'
@@ -23,7 +22,7 @@ export default async function Work({ children }) {
 
   return (
     <>
-      <div className='w-full'>
+      <div className='w-full relative -top-14'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={workBanner.value.asset._ref}
@@ -32,11 +31,9 @@ export default async function Work({ children }) {
       </div>
       {/*  header for categories */}
       <Client />
-      <div className='sm:flex w-full h-[calc(100vh-32px)]'>
-        <div className='w-full flex-none h-full overflow-y-auto flex flex-wrap'>
-          <Works projects={projects} />
-        </div>
-      </div>
+
+      <Works projects={projects} />
+
       {children}
     </>
   )

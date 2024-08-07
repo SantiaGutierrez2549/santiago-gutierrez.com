@@ -4,25 +4,48 @@ import Section from '@/components/Section'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { ProjectsQueryResult } from '../../sanity/sanity-types'
 import LinkFrame from '@/components/LinkFrame'
+import BannerFrame from '@/components/BannerFrame'
+import Link from 'next/link'
 
 export default function Works({ projects }: { projects: ProjectsQueryResult }) {
   const service = useSelectedLayoutSegment()
 
   return (
     <>
+      <div className='sticky top-16 w-full flex justify-around z-10'>
+        {['All', 'Chamber', 'Vocal', 'Orchestra'].map(ensemble => (
+          <Link
+            key={ensemble}
+            href={`/work${ensemble === 'All' ? '' : `/${ensemble}`}`}
+            className={`rounded-lg p-2 w-fit bg-bg2 font-heading ${service === ensemble ? 'border border-accent font-bold' : ''}`}
+            scroll={false}>
+            {ensemble}
+          </Link>
+        ))}
+      </div>
       {/* LinkFrame is the container for works, customize the classes to change things */}
       {projects
-        .filter(project => !service || project.category === service)
+        .filter(project => !service || project.type === service)
         .map(project => (
-          <LinkFrame
-            key={project._id}
-            href={`/work/${project.category}/${project.slug}`}
-            title={project.title}
-            subtitle={project.subtitle}
-            banner={project.banner}
-            className='p-4 w-full h-[300px]'
-            innerClassName='w-full h-full rounded-xl bg-bg2/50'
-          />
+          <div className='w-full h-[300px] sm:p-8 p-2' key={project._id}>
+            <div className='p-4 w-full h-full relative rounded-lg bg-bg2/50 overflow-hidden'>
+              <Link
+                scroll={false}
+                href={`/work/${project.type}/${project.slug}`}
+                title={project.title}
+                className='h-full w-full absolute top-0 left-0'
+              />
+              <div className='flex flex-col justify-center w-full h-full items-center'>
+                <h2 className='rounded-lg p-1 text-h2 backdrop-blur w-fit'>
+                  {project.title}
+                </h2>
+                <p className='rounded-lg p-1 italic backdrop-blur w-fit'>
+                  {project.subtitle}
+                </p>
+              </div>
+              {project.banner && <BannerFrame banner={project.banner} />}
+            </div>
+          </div>
         ))}
     </>
   )
