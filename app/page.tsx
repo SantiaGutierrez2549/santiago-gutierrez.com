@@ -21,7 +21,8 @@ export default async function Home() {
           {homeInfo.upcomingWorks!.map(work => (
             <LinkFrame
               key={work._key}
-              className='h-full w-full px-2'
+              className='h-full w-full'
+              innerClassName='h-full w-full p-4'
               title={work.title}
               subtitle={work.subtitle}
               banner={work.banner}

@@ -1,5 +1,6 @@
 'use client'
 
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Children, useEffect, useRef, useState } from 'react'
 
 export default function CarouselComponent({
@@ -15,27 +16,27 @@ export default function CarouselComponent({
   })
 
   return (
-    <div className='w-full aspect-video p-2 relative'>
+    <div className='w-full aspect-video relative'>
       <div
         className='w-full h-full overflow-hidden flex space-x-1 rounded-lg'
         ref={thisDiv}>
         {Children.map(children, child => (
-          <div className='w-full h-full px-2 flex-none'>{child}</div>
+          <div className='w-full h-full flex-none'>{child}</div>
         ))}
       </div>
       <button
-        className='absolute top-1/2 left-0'
+        className='absolute top-1/2 left-2'
         onClick={() => {
           setIndex(index === 0 ? 4 : index - 1)
         }}>
-        left
+        <ChevronLeft />
       </button>
       <button
-        className='absolute top-1/2 right-0'
+        className='absolute top-1/2 right-2'
         onClick={() => {
           setIndex((index + 1) % 4)
         }}>
-        right
+        <ChevronRight />
       </button>
     </div>
   )

@@ -8,7 +8,7 @@ export default function LinkFrame({
   title,
   subtitle,
   banner,
-  href,
+  href = '',
   children
 }: {
   className?: string
@@ -20,7 +20,7 @@ export default function LinkFrame({
 } & React.PropsWithChildren) {
   return (
     <div className={`${className}`}>
-      <div className={`relative ${innerClassName} p-4`}>
+      <div className={`relative ${innerClassName}`}>
         <Link className='absolute top-0 left-0 h-full w-full' href={href} />
         <h2 className='text-h3'>{title}</h2>
         <div className='text-base'>{subtitle}</div>

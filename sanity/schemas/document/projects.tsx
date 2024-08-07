@@ -26,9 +26,49 @@ const project = defineType({
       name: 'type',
       type: 'string',
       options: {
-        list: ['Orchestra', 'Chamber', 'Vocal']
+        list: ['Orchestra', 'Chamber', 'Vocal', 'Arrangements & Orchestrations']
       },
       validation: rule => rule.required()
+    }),
+    defineField({
+      name: 'instrumentation',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'string',
+          options: {
+            list: [
+              'Open Instrumentation',
+              'Symphonic Percussion',
+              'Hand Percussion',
+              'Clarinet',
+              'Flute',
+              'Oboe',
+              'Bassoon',
+              'Trumpet',
+              'Horn',
+              'Trombone',
+              'Tuba',
+              'Violin',
+              'Viola',
+              'Cello',
+              'Contrabass',
+              'Drumset',
+              'Guitar',
+              'Saxophone',
+              'Voice',
+              'Soprano',
+              'Mezzo-Soprano',
+              'Alto',
+              'Tenor',
+              'Baritone',
+              'Bass',
+              'Countertenor',
+              'Electronics'
+            ]
+          }
+        })
+      ]
     }),
     defineField({
       name: 'date',

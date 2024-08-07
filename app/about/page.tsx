@@ -36,11 +36,13 @@ export default async function About() {
           <SanityImageWrapper
             // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
             id={about.headshot!.asset!._ref}
-            className='w-full rounded-lg max-w-[300px]'
+            className='w-[60vw] min-w-[min(200px,100vw)] rounded-lg'
+            height={800}
+            width={800}
           />
         </div>
         <div className='py-4'>
-          <PortableText value={about.bio!} />
+          <PortableText value={about.bioShort!} />
         </div>
         {// map the array of work experiences to div elements to display them
         about.work?.map(project => (
