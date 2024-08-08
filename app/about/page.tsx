@@ -21,7 +21,6 @@ export default async function About() {
 
   return (
     <>
-      <Client />
       <div className='w-full -z-10 flex items-end justify-left relative -mt-[30%] sm:-mb-[10%] -mb-[20%]'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
@@ -39,7 +38,11 @@ export default async function About() {
             height={800}
             width={800}
           />
-          <PortableText value={about.bioShort!} />
+          <Client
+            short={about.bioShort}
+            medium={about.bioMedium}
+            long={about.bioLong}
+          />
         </div>
         {// map the array of work experiences to div elements to display them
         about.work?.map(project => (

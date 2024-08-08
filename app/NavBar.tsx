@@ -19,8 +19,8 @@ export default function NavBar({
 
   return (
     <>
-      <nav className='sticky top-0 left-0 w-full z-20'>
-        {/* <div className='w-full space-x-6 px-2 h-12 py-1 z-10 relative font-heading items-center sm:flex hidden'>
+      <nav className='sticky top-0 w-full z-20 bg-bgDark text-fgDark backdrop-blur-sm'>
+        <div className='w-full space-x-6 px-2 h-12 py-1 z-10 relative font-heading items-center sm:flex hidden'>
           <Link
             href='/'
             className='text-xl font-heading font-bold tracking-wide'>
@@ -29,17 +29,17 @@ export default function NavBar({
           <div className='grow'></div>
           <Link
             href='/work'
-            className={`${segment === 'work' ? 'heading-accent' : 'heading'}`}>
+            className={`${segment === 'work' ? 'heading-accent' : 'heading'} text-fgDark`}>
             work
           </Link>
           <Link
             href='/about'
-            className={`${segment === 'about' ? 'heading-accent' : 'heading'}`}>
+            className={`${segment === 'about' ? 'heading-accent' : 'heading'} text-fgDark`}>
             about
           </Link>
           <Link
             href='/news'
-            className={`${segment === 'news' ? 'heading-accent' : 'heading'}`}>
+            className={`${segment === 'news' ? 'heading-accent' : 'heading'} text-fgDark`}>
             news
           </Link>
           <div className='grow'></div>
@@ -47,25 +47,9 @@ export default function NavBar({
           <button className='button !h-10'>
             <Link href='/contact'>Contact</Link>
           </button>
-        </div> */}
-        <div className='flex w-full z-30 relative p-3'>
-          <button onClick={() => setNav(!nav)}>
-            {nav ? (
-              <X className='h-full w-full' />
-            ) : (
-              <Menu className='h-full w-full' />
-            )}
-          </button>
-          <div className='grow'></div>
-          <Link
-            href='/'
-            className='text-xl font-heading font-semibold tracking-wide backdrop-blur px-2 rounded-lg'
-            onClick={() => setNav(false)}>
-            {title}
-          </Link>
         </div>
         {nav && (
-          <div className='h-screen w-screen bg-bg/80 backdrop-blur fixed top-0 left-0 flex flex-col justify-around items-center z-20'>
+          <div className='hidden sm:flex h-screen w-screen bg-bg/80 backdrop-blur fixed top-0 left-0 flex-col justify-around items-center z-20'>
             <div className='h-[5%]'></div>
             <Link
               onClick={() => setNav(false)}

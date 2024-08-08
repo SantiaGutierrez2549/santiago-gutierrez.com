@@ -29,7 +29,7 @@ export default function Socials({ socials }: { socials: SocialsQueryResult }) {
               )}
               key={social._key}
               target='_blank'
-              className='invert w-10 h-10 drop-shadow-xl'>
+              className='invert w-8 h-8 drop-shadow-xl'>
               <img src={socialLogos[social.Site!]} className='w-full h-full' />
             </a>
           )

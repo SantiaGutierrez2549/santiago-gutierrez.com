@@ -64,7 +64,8 @@ const project = defineType({
               'Baritone',
               'Bass',
               'Countertenor',
-              'Electronics'
+              'Electronics',
+              'Orchestra'
             ]
           }
         })

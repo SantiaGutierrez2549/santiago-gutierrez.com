@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { projectQuery } from '@/sanity/queries'
 import { ProjectQueryResult } from '@/sanity/sanity-types'
 import ContentFrame from '@/components/ContentFrame'
+import SanityImageWrapper from '@/components/SanityImageWrapper'
 
 export default async function Works({
   params
@@ -21,22 +22,26 @@ export default async function Works({
   const to = `/work`
 
   return (
-    <div className='fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center p-8 backdrop-blur-sm'>
+    <div className='fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center p-8 backdrop-blur-sm bg-bgDark/50'>
       <Link
         href={to}
         scroll={false}
         className='absolute left-0 top-0 -z-10 h-full w-full'
       />
       <div className='relative w-full h-fit max-h-full max-w-4xl cursor-default rounded-lg border border-gray-400 bg-bg backdrop-blur-lg overflow-y-auto'>
-        <div className='h-[200px] w-full flex flex-col justify-center items-center space-y-2'>
-          <div className='text-center text-2xl font-bold p-2 rounded-lg font-heading'>
+        <div className='py-6 w-full flex flex-col justify-center items-center space-y-2'>
+          <h1 className='text-center text-h1 font-bold font-heading'>
             {work.title}
-          </div>
-          <div className='text-center p-2 rounded-lg font-heading'>
-            {work.subtitle}
-          </div>
+          </h1>
+          <div className='text-center font-heading'>{work.subtitle}</div>
         </div>
-        <div className='rounded py-1 p-2'>
+        <div>
+          <SanityImageWrapper
+            id={work.banner?.image?.asset?._ref}
+            className='w-full'
+          />
+        </div>
+        <div className='rounded py-1 p-4'>
           {work.content && <ContentFrame content={work.content} />}
         </div>
       </div>

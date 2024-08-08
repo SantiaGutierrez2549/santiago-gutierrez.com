@@ -6,6 +6,7 @@ import { HomeQueryResult } from '@/sanity/sanity-types'
 import invariant from 'tiny-invariant'
 import LinkFrame from '@/components/LinkFrame'
 import Carousel from '@/components/Carousel'
+import SanityImageWrapper from '@/components/SanityImageWrapper'
 
 export default async function Home() {
   const homeInfo = await sanityFetch<HomeQueryResult>({ query: homeQuery })
@@ -14,6 +15,10 @@ export default async function Home() {
   return (
     <main>
       <Client />
+
+      <p className='text-h3 sm:px-8 px-2 my-6'>{homeInfo.slogan}</p>
+
+      <SanityImageWrapper id={homeInfo.homeImage?.asset?._ref} />
 
       <Section>
         <h2 className='text-h2'>Upcoming Works</h2>
@@ -33,7 +38,7 @@ export default async function Home() {
 
       <Section>
         <h2 className='text-h2'>Highlights</h2>
-        <div className='space-y-8'>
+        <div className='space-y-8 sm:px-[10%]'>
           {homeInfo.highlights!.map((x, i) => (
             <LinkFrame
               key={x._id}
@@ -41,7 +46,10 @@ export default async function Home() {
               subtitle={x.subtitle!}
               href=''
               banner={x.banner}
-              className={`aspect-square w-[400px] max-w-full ${i % 2 === 0 ? 'float-left' : 'float-right text-right'} bg-bg2 rounded-lg p-4`}
+              className={`aspect-square w-[400px] max-w-full bg-bg2 rounded-lg p-4 relative`}
+              style={{
+                marginLeft: i % 2 === 0 ? 'max(0px, calc(100% - 400px))' : 0
+              }}
             />
           ))}
         </div>

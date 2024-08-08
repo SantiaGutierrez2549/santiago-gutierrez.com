@@ -5,6 +5,8 @@ import { SettingsQueryResult, SocialsQueryResult } from '@/sanity/sanity-types'
 import type { Metadata } from 'next'
 import NavBar from './NavBar'
 import './globals.css'
+import Image from 'next/image'
+import SanityImageWrapper from '@/components/SanityImageWrapper'
 
 export const runtime = 'edge'
 
@@ -50,6 +52,20 @@ export default async function RootLayout({
         <NavBar title={data?.siteTitle ?? 'My Site'} socials={socials} />
         {children}
       </body>
+      <footer className='font-body *:px-4 *:sm:px-8'>
+        <div className='bg-bg2/80'>
+          <SanityImageWrapper
+            id={data!.logo!.asset!._ref}
+            className='mx-auto'
+          />
+        </div>
+        <div className='w-full bg-bgDark/50 py-4'>
+          <p className='text-right mb-0'>
+            Designed by Jay Reinier,{' '}
+            <a href='https://jpalindrome.com'>Palindrome Systems</a>
+          </p>
+        </div>
+      </footer>
     </html>
   )
 }

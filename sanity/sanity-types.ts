@@ -172,6 +172,18 @@ export type Home = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  slogan?: string;
+  homeImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   upcomingWorks?: Array<{
     title?: string;
     subtitle?: string;
@@ -215,6 +227,17 @@ export type Settings = {
   accentAltColor?: Color;
   bodyFont?: FontInfo;
   headingFont?: FontInfo;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type FontInfo = {
@@ -330,7 +353,7 @@ export type Projects = {
   subtitle?: string;
   slug: Slug;
   type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations";
-  instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics">;
+  instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics" | "Orchestra">;
   date: string;
   banner?: BannerInfo;
   content?: Content;
@@ -524,6 +547,17 @@ export type SettingsQueryResult = {
   accentAltColor?: Color;
   bodyFont?: FontInfo;
   headingFont?: FontInfo;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 } | null;
 // Variable: socialsQuery
 // Query: *[_type == 'about']{socials}[0]
@@ -581,15 +615,21 @@ export type EventQueryResult = {
   category: null;
 } | null;
 // Variable: projectsQuery
-// Query: *[_type == 'projects']{  _id, title, subtitle, banner, date, type, 'slug': slug.current}
+// Query: *[_type == 'projects']{  ..., 'slug': slug.current}
 export type ProjectsQueryResult = Array<{
   _id: string;
+  _type: "projects";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   title: string;
-  subtitle: string | null;
-  banner: BannerInfo | null;
-  date: string;
-  type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
+  subtitle?: string;
   slug: string;
+  type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
+  instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
+  date: string;
+  banner?: BannerInfo;
+  content?: Content;
 }>;
 // Variable: projectQuery
 // Query: *[_type == 'projects' && slug.current == $slug][0]{  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current, content}
@@ -789,6 +829,18 @@ export type HomeQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  slogan?: string;
+  homeImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   upcomingWorks?: Array<{
     title?: string;
     subtitle?: string;
@@ -831,7 +883,7 @@ export type HomeQueryResult = {
     subtitle?: string;
     slug: Slug;
     type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
-    instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
+    instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
     date: string;
     banner?: BannerInfo;
     content?: Content;

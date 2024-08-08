@@ -9,7 +9,8 @@ export default function LinkFrame({
   subtitle,
   banner,
   href = '',
-  children
+  children,
+  style
 }: {
   className?: string
   innerClassName?: string
@@ -17,9 +18,10 @@ export default function LinkFrame({
   title: string
   subtitle: string | null
   banner?: BannerInfo | null
+  style?: React.CSSProperties
 } & React.PropsWithChildren) {
   return (
-    <div className={`${className}`}>
+    <div className={`${className}`} style={style}>
       <div className={`relative ${innerClassName}`}>
         <Link className='absolute top-0 left-0 h-full w-full' href={href} />
         <h2 className='text-h3'>{title}</h2>

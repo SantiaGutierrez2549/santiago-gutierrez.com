@@ -22,7 +22,7 @@ export default async function Work({ children }) {
 
   return (
     <>
-      <div className='w-full relative -top-14'>
+      <div className='w-[125%] -left-[12%] relative'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={workBanner.value.asset._ref}

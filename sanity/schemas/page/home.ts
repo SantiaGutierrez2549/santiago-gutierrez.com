@@ -5,6 +5,14 @@ const home = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'slogan',
+      type: 'string'
+    }),
+    defineField({
+      name: 'homeImage',
+      type: 'image'
+    }),
+    defineField({
       name: 'upcomingWorks',
       type: 'array',
       of: [

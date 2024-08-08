@@ -107,6 +107,10 @@ const settings = defineType({
           for a free library.
         </div>
       )
+    }),
+    defineField({
+      name: 'logo',
+      type: 'image'
     })
   ]
 })
