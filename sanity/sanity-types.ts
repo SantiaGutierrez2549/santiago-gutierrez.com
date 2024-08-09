@@ -192,6 +192,17 @@ export type Home = {
     banner?: BannerInfo;
     _key: string;
   }>;
+  highlightsBackground?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   highlights?: Array<{
     _ref: string;
     _type: "reference";
@@ -202,10 +213,12 @@ export type Home = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "posts";
-  } | {
+  }>;
+  featuredWorks?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
+    _key: string;
     [internalGroqTypeReferenceTo]?: "projects";
   }>;
 };
@@ -822,7 +835,7 @@ export type AboutSelectQueryResult = {
   } | null>;
 };
 // Variable: homeQuery
-// Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]-> }
+// Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]-> }
 export type HomeQueryResult = {
   _id: string;
   _type: "home";
@@ -849,6 +862,17 @@ export type HomeQueryResult = {
     banner?: BannerInfo;
     _key: string;
   }>;
+  highlightsBackground?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   highlights: Array<{
     _id: string;
     _type: "events";
@@ -873,7 +897,8 @@ export type HomeQueryResult = {
     date: string;
     banner?: BannerInfo;
     content: Content;
-  } | {
+  }> | null;
+  featuredWorks: Array<{
     _id: string;
     _type: "projects";
     _createdAt: string;

@@ -51,21 +51,21 @@ export default async function RootLayout({
       <body className={`bg-bg font-body text-fg`}>
         <NavBar title={data?.siteTitle ?? 'My Site'} socials={socials} />
         {children}
+        <footer className='font-body *:px-4 *:sm:px-8'>
+          <div className='bg-bgDark'>
+            <SanityImageWrapper
+              id={data!.logo!.asset!._ref}
+              className='mx-auto invert'
+            />
+          </div>
+          <div className='w-full bg-bgDark/50 py-4'>
+            <p className='text-right mb-0'>
+              Designed by Jay Reinier,{' '}
+              <a href='https://jpalindrome.com'>Palindrome Systems</a>
+            </p>
+          </div>
+        </footer>
       </body>
-      <footer className='font-body *:px-4 *:sm:px-8'>
-        <div className='bg-bg2/80'>
-          <SanityImageWrapper
-            id={data!.logo!.asset!._ref}
-            className='mx-auto'
-          />
-        </div>
-        <div className='w-full bg-bgDark/50 py-4'>
-          <p className='text-right mb-0'>
-            Designed by Jay Reinier,{' '}
-            <a href='https://jpalindrome.com'>Palindrome Systems</a>
-          </p>
-        </div>
-      </footer>
     </html>
   )
 }

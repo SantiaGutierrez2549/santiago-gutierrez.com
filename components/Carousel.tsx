@@ -9,11 +9,13 @@ export default function CarouselComponent({
   const [index, setIndex] = useState(0)
   const thisDiv = useRef<HTMLDivElement>(null!)
   useEffect(() => {
-    thisDiv.current.children[index]?.scrollIntoView({
-      inline: 'start',
+    thisDiv.current.scrollTo({
+      left: thisDiv.current.children[index].offsetLeft,
       behavior: 'smooth'
     })
-  })
+  }, [index])
+
+  console.log('index', index)
 
   return (
     <div className='w-full aspect-video relative'>
@@ -27,14 +29,14 @@ export default function CarouselComponent({
       <button
         className='absolute top-1/2 left-2'
         onClick={() => {
-          setIndex(index === 0 ? 4 : index - 1)
+          setIndex(index === 0 ? Children.count(children) - 1 : index - 1)
         }}>
         <ChevronLeft />
       </button>
       <button
         className='absolute top-1/2 right-2'
         onClick={() => {
-          setIndex((index + 1) % 4)
+          setIndex((index + 1) % Children.count(children))
         }}>
         <ChevronRight />
       </button>

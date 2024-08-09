@@ -14,7 +14,7 @@ export default function Client() {
   const yCount = (window.innerHeight * 0.33) / 10
   const xCount = window.innerWidth
   return (
-    <Reactive className='h-[calc(70vh-60px)] w-screen -z-10 relative'>
+    <Reactive className='h-[calc(70vh-60px)] w-screen z-10 relative -mt-[120px]'>
       <Processing
         name='p'
         type='p2d'
@@ -49,14 +49,19 @@ export default function Client() {
           p.clear()
           p.noFill()
           p.colorMode(p.HSL, 1)
-          p.stroke('black')
+
           p.strokeWeight(5)
-          // add some stuff to the curves
-          // make some noise with one line
+          // add some stuff to the curves.
+          // make some noise with one line.
 
           const lastCurve = _.range(xCount).map(() => 0)
+          const noise = _.range(xCount).map(
+            i => noise3D((i / 1000) * 3, 0, time * 0.2) * 30
+          )
 
           for (let y = 0; y < yCount; y++) {
+            if (y <= 6) p.stroke('white')
+            else p.stroke('black')
             const startIndex = Math.floor((((time / 10) * 4) % 1) * xCount)
             const randomWeights = props.randomWidths[y]
             let x = startIndex
@@ -68,7 +73,10 @@ export default function Client() {
                   (p.height / yCount) +
                 10
               p.strokeWeight(randomWeights[x] * 5)
-              p.point(((p.width + 20) / xCount) * i - 10, lastCurve[x])
+              p.point(
+                ((p.width + 20) / xCount) * i - 10,
+                lastCurve[x] + noise[i]
+              )
             }
           }
         }}

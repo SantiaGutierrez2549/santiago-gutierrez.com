@@ -35,12 +35,26 @@ const home = defineType({
       ]
     }),
     defineField({
+      name: 'highlightsBackground',
+      type: 'image'
+    }),
+    defineField({
       name: 'highlights',
       type: 'array',
       of: [
         {
           type: 'reference',
-          to: [{ type: 'events' }, { type: 'posts' }, { type: 'projects' }]
+          to: [{ type: 'events' }, { type: 'posts' }]
+        }
+      ]
+    }),
+    defineField({
+      name: 'featuredWorks',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'projects' }]
         }
       ]
     })
