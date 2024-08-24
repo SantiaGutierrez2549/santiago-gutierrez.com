@@ -20,7 +20,7 @@ export default function CarouselComponent({
   return (
     <div className='w-full aspect-video relative'>
       <div
-        className='w-full h-full overflow-hidden flex space-x-1 rounded-lg'
+        className='w-full h-full overflow-hidden flex space-x-1'
         ref={thisDiv}>
         {Children.map(children, child => (
           <div className='w-full h-full flex-none'>{child}</div>

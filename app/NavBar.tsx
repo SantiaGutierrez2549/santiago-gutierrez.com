@@ -20,29 +20,31 @@ export default function NavBar({
   return (
     <>
       <nav className='sticky top-0 w-full z-20 bg-bgDark text-fgDark backdrop-blur-sm'>
-        <div className='w-full space-x-6 px-2 h-12 py-1 z-10 relative font-heading items-center sm:flex hidden'>
+        <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center sm:flex hidden'>
           <Link
             href='/'
-            className='text-xl font-heading font-bold tracking-wide'>
+            className='text-h2 font-heading tracking-wide whitespace-nowrap'>
             {title}
           </Link>
           <div className='grow'></div>
+          <Link href='/' className={`heading text-fgDark`}>
+            Home
+          </Link>
           <Link
             href='/work'
             className={`${segment === 'work' ? 'heading-accent' : 'heading'} text-fgDark`}>
-            work
+            Works
           </Link>
           <Link
             href='/about'
             className={`${segment === 'about' ? 'heading-accent' : 'heading'} text-fgDark`}>
-            about
+            About
           </Link>
           <Link
             href='/news'
             className={`${segment === 'news' ? 'heading-accent' : 'heading'} text-fgDark`}>
-            news
+            News
           </Link>
-          <div className='grow'></div>
           <Socials socials={socials} />
           <button className='button !h-10'>
             <Link href='/contact'>Contact</Link>

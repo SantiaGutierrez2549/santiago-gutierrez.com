@@ -18,13 +18,20 @@ export default async function Home() {
     <main>
       <div className='w-full relative'>
         <SanityImageWrapper id={homeInfo.homeImage?.asset?._ref} />
-        <p className='absolute left-8 bottom-1/3 sm:w-1/2 w-full text-sm text-bg text-left bg-bgDark/50 backdrop-blur rounded-xl p-1'>
-          {homeInfo.slogan}
-        </p>
       </div>
+
+      <p className='text-fg text-center backdrop-blur rounded-xl p-1'>
+        {homeInfo.slogan}
+      </p>
+      <p className='text-center'>
+        <a href='/about' className='underline  text-right'>
+          Read more...
+        </a>
+      </p>
+
       <Client />
 
-      <h2 className='text-h2  text-center py-4'>Upcoming</h2>
+      <h2 className='text-h2 text-center bg-bgDark text-bg'>Upcoming</h2>
       <Carousel>
         {homeInfo.upcomingWorks!.map(work => (
           <LinkFrame
@@ -37,14 +44,14 @@ export default async function Home() {
           />
         ))}
       </Carousel>
-
+      <h2 className='text-h2 text-center bg-bgDark text-bg'>Highlights</h2>
       <div className='relative w-full py-8'>
         <SanityImageWrapper
           className='h-full w-full absolute object-cover top-0 left-0 -z-10'
           id={homeInfo.highlightsBackground?.asset?._ref}
         />
-        <h2 className='text-h2 text-center py-4'>Highlights</h2>
-        <div className='space-y-8 sm:px-[10%]'>
+
+        <div className='space-y-8 sm:px-[10%] pt-12'>
           {homeInfo.highlights!.map((x, i) => (
             <LinkFrame
               key={x._id}
@@ -52,7 +59,7 @@ export default async function Home() {
               subtitle={x.subtitle!}
               href=''
               banner={x.banner}
-              className={`aspect-square w-[400px] max-w-full bg-bg2 rounded-lg p-4 relative`}
+              className={`aspect-square w-[400px] max-w-full bg-bgDark/50 backdrop-blur rounded-lg p-4 relative`}
               style={{
                 marginLeft: i % 2 === 0 ? 'max(0px, calc(100% - 400px))' : 0
               }}
@@ -61,8 +68,8 @@ export default async function Home() {
         </div>
       </div>
 
+      <h2 className='text-h2 text-center bg-bgDark text-bg'>Featured Work</h2>
       <div className='w-full'>
-        <h2 className='text-h2  text-center py-4'>Featured Work</h2>
         <div className='w-full'>
           {homeInfo.featuredWorks?.map(work => {
             return (

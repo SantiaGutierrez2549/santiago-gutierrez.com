@@ -11,10 +11,10 @@ const noise3D = createNoise3D()
 const noise2D = createNoise2D()
 export default function Client() {
   type Context = ReactiveContext<{}, { randomWidths: number[][] }>
-  const yCount = (window.innerHeight * 0.33) / 10
+  const yCount = (window.innerHeight * 0.33 * 0.66) / 10
   const xCount = window.innerWidth
   return (
-    <Reactive className='h-[calc(70vh-60px)] w-screen z-10 relative -mt-[120px]'>
+    <Reactive className='h-[calc(50vh-60px)] w-screen z-10 relative'>
       <Processing
         name='p'
         type='p2d'
@@ -60,8 +60,9 @@ export default function Client() {
           )
 
           for (let y = 0; y < yCount; y++) {
-            if (y <= 6) p.stroke('white')
-            else p.stroke('black')
+            // if (y <= 6) p.stroke('white')
+            // else
+            p.stroke('black')
             const startIndex = Math.floor((((time / 10) * 4) % 1) * xCount)
             const randomWeights = props.randomWidths[y]
             let x = startIndex
