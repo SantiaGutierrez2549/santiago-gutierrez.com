@@ -9,6 +9,7 @@ import { PortableText } from '@portabletext/react'
 import invariant from 'tiny-invariant'
 import Client from './client'
 import BannerFrame from '@/components/BannerFrame'
+import { BASE_URL_IMAGES } from '@/sanity/env'
 
 export default async function About() {
   const about = await sanityFetch<AboutQueryResult>({ query: aboutQuery })
@@ -21,23 +22,37 @@ export default async function About() {
 
   return (
     <>
-      <div className='w-full -z-10 flex items-end justify-left relative -mt-[30%] sm:-mb-[10%] -mb-[20%]'>
+      <div className='w-full -z-10 flex items-end justify-left relative -mt-[30%]'>
         <SanityImageWrapper
           // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
           id={aboutBanner.value.asset._ref}
           className='w-full sm:w-[60vw]'
         />
       </div>
+      <h1 className='text-h1 text-center'>About</h1>
       <Section className='pt-[100px]'>
         <div className='w-full px-2 flex flex-col items-end'></div>
         <div className='py-4 relative'>
-          <SanityImageWrapper
-            // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
-            id={about.headshot!.asset!._ref}
-            className='float-right min-w-[min(200px,100vw)] rounded-lg w-full sm:w-1/2 mb-4 sm:m-4 sm:-top-20 sm:left-10 relative'
-            height={800}
-            width={800}
-          />
+          <div className='float-right min-w-[min(200px,100vw)] w-full sm:w-1/2 relative p-4'>
+            <SanityImageWrapper
+              className='rounded-lg'
+              // Pass the Sanity Image ID (`_id`) (e.g., `image-abcde12345-1200x800-jpg`)
+              id={about.headshot!.asset!._ref}
+              height={800}
+              width={800}
+            />
+            <p className='text-sm text-right'>
+              <a
+                className='underline'
+                href={`${BASE_URL_IMAGES}${about.headshot.asset?._ref.replace('-png', '.png').replace('image-', '')}`}
+                download={'Santiago-Gutierrez.png'}
+                target='_blank'>
+                download
+              </a>{' '}
+              Photo credit: Marvin Fuchs / HfMDK Frankfurt
+            </p>
+          </div>
+
           <Client
             short={about.bioShort}
             medium={about.bioMedium}

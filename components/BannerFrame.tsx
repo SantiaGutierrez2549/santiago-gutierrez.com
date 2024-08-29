@@ -20,17 +20,27 @@ const assembleGradient = (gradient: {
       return `linear-gradient(to bottom, ${hexString})`
   }
 }
-export default function BannerFrame({ banner }: { banner: BannerInfo }) {
+export default function BannerFrame({
+  banner,
+  noHeight,
+  className
+}: {
+  banner: BannerInfo
+  noHeight?: boolean
+  className?: string
+}) {
   const fullHeight = 'absolute top-0 left-0 -z-10 h-full w-full'
   switch (banner.bannerType) {
     case 'none':
       return <div className={`h-full w-full ${fullHeight}`} />
     case 'image':
+      console.log('image', noHeight)
+
       return (
         banner.image?.asset && (
           <SanityImageWrapper
             id={banner.image.asset._ref}
-            className={`${fullHeight} object-cover`}
+            className={`${!noHeight ? fullHeight : ''} ${className ?? ''} object-cover`}
           />
         )
       )

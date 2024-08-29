@@ -18,7 +18,7 @@ export default function CarouselComponent({
   console.log('index', index)
 
   return (
-    <div className='w-full aspect-video relative'>
+    <div className='w-full relative'>
       <div
         className='w-full h-full overflow-hidden flex space-x-1'
         ref={thisDiv}>

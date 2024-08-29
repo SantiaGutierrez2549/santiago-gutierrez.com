@@ -28,7 +28,8 @@ const home = defineType({
               type: 'string'
             },
             { name: 'info', type: 'content' },
-            { name: 'date', type: 'date' },
+            { name: 'date', type: 'datetime' },
+            { name: 'place', type: 'string' },
             { name: 'banner', type: 'bannerInfo' }
           ]
         }

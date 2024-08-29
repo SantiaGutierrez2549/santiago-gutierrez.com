@@ -6,6 +6,8 @@ import { ProjectsQueryResult } from '../../sanity/sanity-types'
 import LinkFrame from '@/components/LinkFrame'
 import BannerFrame from '@/components/BannerFrame'
 import Link from 'next/link'
+import { DateTime } from 'luxon'
+import { sortBy } from 'lodash'
 
 export default function Works({ projects }: { projects: ProjectsQueryResult }) {
   const service = useSelectedLayoutSegment()
@@ -16,7 +18,7 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
         {['All', 'Chamber', 'Vocal', 'Orchestra'].map(ensemble => (
           <Link
             key={ensemble}
-            href={`/work${ensemble === 'All' ? '' : `/${ensemble}`}`}
+            href={`/works${ensemble === 'All' ? '' : `/${ensemble}`}`}
             className={`rounded-lg p-2 w-fit font-heading ${service === ensemble || (ensemble === 'All' && !service) ? 'border border-accent font-bold' : ''}`}
             scroll={false}>
             {ensemble}
@@ -24,14 +26,17 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
         ))}
       </div>
       {/* LinkFrame is the container for works, customize the classes to change things */}
-      {projects
-        .filter(project => !service || project.type === service)
+      {sortBy(
+        projects.filter(project => !service || project.type === service),
+        project => project.date
+      )
+        .reverse()
         .map(project => (
           <div className='w-full sm:p-8 p-2' key={project._id}>
             <div className='p-4 w-full h-full relative rounded-lg bg-bg2/50 overflow-hidden'>
               <Link
                 scroll={false}
-                href={`/work/${project.type}/${project.slug}`}
+                href={`/works/${project.type}/${project.slug}`}
                 title={project.title}
                 className='h-full w-full absolute top-0 left-0 z-10'
               />
@@ -43,7 +48,15 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
                   <p className='rounded-lg p-1 italic backdrop-blur w-fit'>
                     {project.subtitle}
                   </p>
+                  <div className='flex space-x-2'>
+                    <div className='whitespace-nowrap'>
+                      {DateTime.fromISO(project.date!).toFormat('LLLL y')}
+                    </div>
+                    <div className=''>|</div>
+                    <div className='whitespace-nowrap'>{project.duration}</div>
+                  </div>
                 </div>
+
                 <div className='flex flex-wrap w-1/3 items-center justify-end'>
                   {project.instrumentation?.map(instrument => (
                     <div className='rounded-lg bg-accent/50 h-fit px-2 py-1 mx-1'>

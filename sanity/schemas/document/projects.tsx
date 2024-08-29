@@ -77,6 +77,11 @@ const project = defineType({
       validation: rule => rule.required()
     }),
     defineField({
+      name: 'duration',
+      type: 'string',
+      validation: rule => rule.required()
+    }),
+    defineField({
       name: 'banner',
       type: 'bannerInfo'
     }),

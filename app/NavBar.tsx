@@ -2,7 +2,7 @@
 
 import Socials from '@/components/Socials'
 import { About, SocialsQueryResult } from '@/sanity/sanity-types'
-import { Menu, X } from 'lucide-react'
+import { Menu, MenuIcon, X } from 'lucide-react'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { useState } from 'react'
@@ -31,8 +31,8 @@ export default function NavBar({
             Home
           </Link>
           <Link
-            href='/work'
-            className={`${segment === 'work' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            href='/works'
+            className={`${segment === 'works' ? 'heading-accent' : 'heading'} text-fgDark`}>
             Works
           </Link>
           <Link
@@ -50,25 +50,38 @@ export default function NavBar({
             <Link href='/contact'>Contact</Link>
           </button>
         </div>
+        <div
+          className='sm:hidden absolute top-0 left-0 p-2 !cursor-pointer'
+          onClick={() => setNav(!nav)}>
+          <MenuIcon className='invert' />
+        </div>
         {nav && (
-          <div className='hidden sm:flex h-screen w-screen bg-bg/80 backdrop-blur fixed top-0 left-0 flex-col justify-around items-center z-20'>
+          <div
+            className='sm:hidden flex h-screen w-screen backdrop-blur fixed top-0 left-0 flex-col justify-around items-center z-20 bg-bgDark/50 text-fgDark'
+            onClick={() => setNav(false)}>
             <div className='h-[5%]'></div>
             <Link
               onClick={() => setNav(false)}
-              href='/work'
-              className={`block ${segment === 'work' ? 'heading-accent' : 'heading'}`}>
-              work
+              href='/'
+              className={`block text-fgDark ${segment === '' ? 'heading-accent' : 'heading'}`}>
+              home
+            </Link>
+            <Link
+              onClick={() => setNav(false)}
+              href='/works'
+              className={`block text-fgDark ${segment === 'works' ? 'heading-accent' : 'heading'}`}>
+              works
             </Link>
             <Link
               onClick={() => setNav(false)}
               href='/about'
-              className={`block ${segment === 'about' ? 'heading-accent' : 'heading'}`}>
+              className={`block text-fgDark ${segment === 'about' ? 'heading-accent' : 'heading'}`}>
               about
             </Link>
             <Link
               onClick={() => setNav(false)}
               href='/news'
-              className={`block ${segment === 'news' ? 'heading-accent' : 'heading'}`}>
+              className={`block text-fgDark ${segment === 'news' ? 'heading-accent' : 'heading'}`}>
               news
             </Link>
             <Socials socials={socials} />

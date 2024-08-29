@@ -189,6 +189,7 @@ export type Home = {
     subtitle?: string;
     info?: Content;
     date?: string;
+    place?: string;
     banner?: BannerInfo;
     _key: string;
   }>;
@@ -368,6 +369,7 @@ export type Projects = {
   type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations";
   instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics" | "Orchestra">;
   date: string;
+  duration: string;
   banner?: BannerInfo;
   content?: Content;
 };
@@ -538,8 +540,9 @@ export type HslaColor = {
   l?: number;
   a?: number;
 };
-export declare const internalGroqTypeReferenceTo: unique symbol;
 
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | WorkInfo | RawAssetInfo | Description | Content | ImageInfo | AssetInfo | Home | Settings | FontInfo | About | Projects | Posts | Events | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | BannerInfo | Slug | Color | RgbaColor | HsvaColor | HslaColor;
+export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: queries/index.ts
 // Variable: settingsQuery
 // Query: *[_type == 'settings'][0]
@@ -582,7 +585,7 @@ export type SocialsQueryResult = {
   }> | null;
 } | null;
 // Variable: postsQuery
-// Query: *[_type == 'posts']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current}
+// Query: *[_type == 'posts']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}
 export type PostsQueryResult = Array<{
   _id: string;
   title: string;
@@ -591,6 +594,7 @@ export type PostsQueryResult = Array<{
   subtitle: string | null;
   date: string;
   category: null;
+  content: Content;
 }>;
 // Variable: postQuery
 // Query: *[_type == 'posts' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }
@@ -641,6 +645,7 @@ export type ProjectsQueryResult = Array<{
   type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
   instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
   date: string;
+  duration: string;
   banner?: BannerInfo;
   content?: Content;
 }>;
@@ -832,7 +837,7 @@ export type AboutSelectQueryResult = {
       };
       _type: "file";
     };
-  } | null>;
+  }> | null;
 };
 // Variable: homeQuery
 // Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]-> }
@@ -859,6 +864,7 @@ export type HomeQueryResult = {
     subtitle?: string;
     info?: Content;
     date?: string;
+    place?: string;
     banner?: BannerInfo;
     _key: string;
   }>;
@@ -910,8 +916,26 @@ export type HomeQueryResult = {
     type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
     instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
     date: string;
+    duration: string;
     banner?: BannerInfo;
     content?: Content;
   }> | null;
 } | null;
 
+// Query TypeMap
+import "@sanity/client";
+declare module "@sanity/client" {
+  interface SanityQueries {
+    "*[_type == 'settings'][0]": SettingsQueryResult;
+    "*[_type == 'about']{socials}[0]": SocialsQueryResult;
+    "*[_type == 'posts']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}": PostsQueryResult;
+    "*[_type == 'posts' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }": PostQueryResult;
+    "*[_type == 'events']{_id, 'slug': slug.current, title, subtitle, banner, date, 'category': category->slug.current}": EventsQueryResult;
+    "*[_type == 'events' && slug.current == $slug][0]{\n  _id, title, subtitle, banner, content, date, 'slug': slug.current, 'category': category->slug.current\n}": EventQueryResult;
+    "*[_type == 'projects']{\n  ..., 'slug': slug.current\n}": ProjectsQueryResult;
+    "*[_type == 'projects' && slug.current == $slug][0]{\n  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current, content\n}": ProjectQueryResult;
+    "*[_type == 'about'][0]": AboutQueryResult;
+    "{ 'value': *[_type == 'about'][0][$key] }": AboutSelectQueryResult;
+    "*[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]-> }": HomeQueryResult;
+  }
+}

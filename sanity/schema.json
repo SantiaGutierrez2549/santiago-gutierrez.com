@@ -1111,6 +1111,13 @@
                 },
                 "optional": true
               },
+              "place": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
               "banner": {
                 "type": "objectAttribute",
                 "value": {
@@ -2316,6 +2323,13 @@
         "optional": true
       },
       "date": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
+      "duration": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

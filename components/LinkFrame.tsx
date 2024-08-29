@@ -8,13 +8,13 @@ export default function LinkFrame({
   title,
   subtitle,
   banner,
-  href = '',
+  href,
   children,
   style
 }: {
   className?: string
   innerClassName?: string
-  href: string
+  href?: string
   title: string
   subtitle: string | null
   banner?: BannerInfo | null
@@ -23,7 +23,9 @@ export default function LinkFrame({
   return (
     <div className={`${className}`} style={style}>
       <div className={`relative ${innerClassName}`}>
-        <Link className='absolute top-0 left-0 h-full w-full' href={href} />
+        {href && (
+          <Link className='absolute top-0 left-0 h-full w-full' href={href} />
+        )}
         <h2 className='text-h3'>{title}</h2>
         <div className='text-base'>{subtitle}</div>
         {banner && <BannerFrame banner={banner} />}
