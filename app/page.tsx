@@ -51,7 +51,7 @@ export default async function Home() {
             </div>
             <SanityImageWrapper
               id={work.banner?.image?.asset?._ref}
-              className='sm:w-[50%] w-full sm:h-full object-cover'
+              className='sm:w-[50%] w-full sm:h-full object-cover sm:ml-2'
             />
           </LinkFrame>
         ))}
