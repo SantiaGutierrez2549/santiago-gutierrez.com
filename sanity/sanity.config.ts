@@ -14,6 +14,7 @@ const singletonDocuments = [
   { id: 'about', title: 'About' },
   { id: 'home', title: 'Home' }
 ]
+
 const sanityConfig = defineConfig({
   projectId,
   dataset,
@@ -22,8 +23,8 @@ const sanityConfig = defineConfig({
   plugins: [
     colorInput(),
     structureTool({
-      structure: S =>
-        S.list()
+      structure: S => {
+        return S.list()
           .title('Content')
           .items([
             ...singletonDocuments.map(({ id, title }) =>
@@ -36,6 +37,7 @@ const sanityConfig = defineConfig({
                 !singletonDocuments.find(item => item.id === listItem.getId()!)
             )
           ])
+      }
     })
   ]
 })

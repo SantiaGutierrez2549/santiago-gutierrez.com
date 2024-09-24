@@ -49,6 +49,10 @@
   .heading-accent {
     @apply tracking-wider;
   }
+
+  .heading-strip {
+    @apply text-h2 text-center bg-bgDark text-bg;
+  }
 }
 
 @layer utilities {

@@ -34,8 +34,6 @@ export default function BannerFrame({
     case 'none':
       return <div className={`h-full w-full ${fullHeight}`} />
     case 'image':
-      console.log('image', noHeight)
-
       return (
         banner.image?.asset && (
           <SanityImageWrapper

@@ -1,5 +1,4 @@
-import event from './document/events'
-import post from './document/posts'
+import news from './document/news'
 import project from './document/projects'
 import about from './page/about'
 import home from './page/home'
@@ -10,10 +9,11 @@ import content from './type/content'
 import description from './type/description'
 import fontInfo from './type/fontInfo'
 import imageInfo from './type/imageInfo'
+import instrument from './type/instrument'
 import rawAssetInfo from './type/rawAssetInfo'
 import workInfo from './type/workInfo'
 
-const documents = [event, post, project]
+const documents = [news, project]
 
 const pages = [about, settings, home]
 
@@ -25,7 +25,8 @@ const types = [
   imageInfo,
   rawAssetInfo,
   fontInfo,
-  workInfo
+  workInfo,
+  instrument
 ]
 
 export const schema = {

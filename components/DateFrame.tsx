@@ -10,7 +10,7 @@ export default function DateFrame({
   const d = DateTime.fromISO(date)
   return (
     <div
-      className={`${className} text-xs bg-bg2 rounded-lg p-2 w-fit h-fit font-sans whitespace-nowrap text-center`}>
+      className={`${className} text-xs rounded-lg p-2 w-fit h-fit font-sans whitespace-nowrap text-center bg-fg text-bg`}>
       <p>{d.toFormat('LLL dd')}</p>
       <p>{d.toFormat('yyyy')}</p>
     </div>

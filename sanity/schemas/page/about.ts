@@ -43,6 +43,11 @@ const about = defineType({
       type: 'image'
     }),
     defineField({
+      name: 'bannerEvents',
+      title: 'Banner: Events',
+      type: 'image'
+    }),
+    defineField({
       name: 'bioShort',
       title: 'Bio (Short)',
       type: 'array',

@@ -1,4 +1,5 @@
-import { defineField, defineType } from 'sanity'
+import { filter } from 'lodash'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 const home = defineType({
   name: 'home',
@@ -14,24 +15,15 @@ const home = defineType({
     }),
     defineField({
       name: 'upcomingWorks',
+      title: 'Upcoming Events',
       type: 'array',
       of: [
         {
-          type: 'object',
-          fields: [
-            {
-              name: 'title',
-              type: 'string'
-            },
-            {
-              name: 'subtitle',
-              type: 'string'
-            },
-            { name: 'info', type: 'content' },
-            { name: 'date', type: 'datetime' },
-            { name: 'place', type: 'string' },
-            { name: 'banner', type: 'bannerInfo' }
-          ]
+          type: 'reference',
+          to: [{ type: 'news' }],
+          options: {
+            filter: 'newsType == "event"'
+          }
         }
       ]
     }),
@@ -45,7 +37,10 @@ const home = defineType({
       of: [
         {
           type: 'reference',
-          to: [{ type: 'events' }, { type: 'posts' }]
+          to: [{ type: 'news' }],
+          options: {
+            filter: 'newsType == "post"'
+          }
         }
       ]
     }),

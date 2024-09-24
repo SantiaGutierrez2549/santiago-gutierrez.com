@@ -19,8 +19,11 @@ export default async function Home() {
 
   return (
     <main>
-      <div className='w-full relative'>
-        <SanityImageWrapper id={homeInfo.homeImage?.asset?._ref} />
+      <div className='w-full relative h-[calc(90vh-45px)] overflow-hidden'>
+        <SanityImageWrapper
+          id={homeInfo.homeImage?.asset?._ref}
+          className='w-full h-full object-cover'
+        />
       </div>
       <Client />
       <p className='text-fg text-center backdrop-blur rounded-xl p-1 text-[22px] w-full'>
@@ -34,20 +37,21 @@ export default async function Home() {
         </a>
       </p>
 
-      <h2 className='text-h2 text-center bg-bgDark text-bg'>Upcoming</h2>
+      <h2 className='heading-strip'>Upcoming</h2>
       <Carousel>
         {homeInfo.upcomingWorks!.map(work => (
           <LinkFrame
-            key={work._key}
+            key={work._id}
             className='h-full w-full'
             innerClassName='h-full w-full py-4 px-8 flex flex-col sm:flex-row'>
-            <div>
+            <div className='sm:h-full sm:flex sm:flex-col'>
               <div className='flex justify-end w-full'>
-                <h2 className='text-h2 w-full'>{work.title}</h2>
+                <h2 className='text-h2 w-full mr-2'>{work.title}</h2>
                 {work.date && <DateFrame date={work.date} />}
               </div>
               <h3 className='text-base'>{work.subtitle}</h3>
-              {work.info && <ContentFrame content={work.info} />}
+              <div className='grow'></div>
+              {work.content && <ContentFrame content={work.content} />}
             </div>
             <SanityImageWrapper
               id={work.banner?.image?.asset?._ref}
@@ -56,7 +60,7 @@ export default async function Home() {
           </LinkFrame>
         ))}
       </Carousel>
-      <h2 className='text-h2 text-center bg-bgDark text-bg'>Highlights</h2>
+      <h2 className='heading-strip'>Highlights</h2>
       <div className='relative w-full py-8 px-2'>
         <SanityImageWrapper
           className='h-full w-full absolute object-cover top-0 left-0 -z-10'
@@ -85,7 +89,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <h2 className='text-h2 text-center bg-bgDark text-bg'>Featured Work</h2>
+      <h2 className='heading-strip'>Featured Work</h2>
       <div className='w-full pt-8 px-4'>
         <div className='w-full'>
           {homeInfo.featuredWorks?.map(work => {

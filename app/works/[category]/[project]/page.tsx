@@ -18,7 +18,6 @@ export default async function Works({
     params: { slug: params.project }
   })
   invariant(work)
-
   const to = `/works`
 
   return (
@@ -29,11 +28,11 @@ export default async function Works({
         className='absolute left-0 top-0 -z-10 h-full w-full'
       />
       <div className='relative w-full h-fit max-h-full max-w-4xl cursor-default rounded-lg border border-gray-400 bg-bg backdrop-blur-lg overflow-y-auto'>
-        <div className='py-6 w-full flex flex-col justify-center items-center space-y-2'>
-          <h1 className='text-center text-h1 font-bold font-heading'>
-            {work.title}
-          </h1>
-          <div className='text-center font-heading'>{work.subtitle}</div>
+        <div className='py-6 w-full flex flex-col justify-center items-center space-y-2 heading-strip'>
+          <h1 className='text-h1'>{work.title}</h1>
+          <div className='text-lg text-center font-heading heading-strip'>
+            {work.subtitle}
+          </div>
         </div>
         <div>
           <SanityImageWrapper

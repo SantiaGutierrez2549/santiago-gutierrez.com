@@ -52,7 +52,7 @@ export default async function RootLayout({
         <NavBar title={data?.siteTitle ?? 'My Site'} socials={socials} />
         {children}
         <footer className='font-body *:px-4 *:sm:px-8'>
-          <div className='bg-bgDark'>
+          <div className='bg-bgDark '>
             <SanityImageWrapper
               id={data!.logo!.asset!._ref}
               className='mx-auto invert'

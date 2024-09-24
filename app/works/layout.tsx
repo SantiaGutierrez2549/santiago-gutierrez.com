@@ -29,6 +29,8 @@ export default async function Work({ children }) {
           className='w-full'
         />
       </div>
+
+      <h1 className='heading-strip mb-8 -mt-[8vw]'>Works</h1>
       {/*  header for categories */}
       <Client />
 

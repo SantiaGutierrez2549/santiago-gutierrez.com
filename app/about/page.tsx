@@ -29,8 +29,8 @@ export default async function About() {
           className='w-full sm:w-[60vw]'
         />
       </div>
-      <h1 className='text-h1 text-center'>About</h1>
-      <Section className='pt-[100px]'>
+      <h1 className='heading-strip'>About</h1>
+      <Section className='pt-12'>
         <div className='w-full px-2 flex flex-col items-end'></div>
         <div className='py-4 relative'>
           <div className='float-right min-w-[min(200px,100vw)] w-full sm:w-1/2 relative p-4'>

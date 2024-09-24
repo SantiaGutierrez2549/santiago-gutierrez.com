@@ -11,15 +11,12 @@ import { sortBy } from 'lodash'
 import Client from './client'
 import Posts from './posts-client'
 import SanityImageWrapper from '@/components/SanityImageWrapper'
+import DateFrame from '@/components/DateFrame'
 
 export default async function Layout({ children }) {
   const posts = await sanityFetch<PostsQueryResult>({
     query: postsQuery
   })
-
-  const events = await sanityFetch<EventsQueryResult>({ query: eventsQuery })
-
-  const today = new Date().toISOString().slice(0, 10)
 
   const newsBanner = (await sanityFetch<AboutSelectQueryResult>({
     query: aboutSelectQuery,
@@ -37,26 +34,11 @@ export default async function Layout({ children }) {
       </div>
       <Client />
 
-      <Section>
-        <h1 className='text-h1 text-center heading'>Upcoming Events</h1>
-        {sortBy(
-          events.filter(event => event.date >= today),
-          'date'
-        ).map(event => (
-          <LinkFrame
-            className='textBox'
-            key={event._id}
-            title={event.title}
-            subtitle={event.subtitle}
-            href={`news/events/${event.slug}`}></LinkFrame>
-        ))}
-      </Section>
-      <Section>
-        {
-          // making a client-side component for Posts so it can use state to toggle between them
-        }
-        <Posts posts={posts} />
-      </Section>
+      {
+        // making a client-side component for Posts so it can use state to toggle between them
+      }
+      <Posts posts={posts} />
+
       {children}
     </>
   )

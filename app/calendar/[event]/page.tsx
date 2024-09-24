@@ -1,3 +1,4 @@
+import BannerFrame from '@/components/BannerFrame'
 import ContentFrame from '@/components/ContentFrame'
 import Section from '@/components/Section'
 import { sanityFetch } from '@/sanity/lib/fetch'
@@ -13,21 +14,26 @@ export default async function Event({ params }) {
     params: { slug: params.event }
   })
   invariant(eventData)
+  console.log('showing event', eventData)
+
   return (
     <>
-      <div className='w-screen h-screen fixed top-0 left-0 p-8 z-10'>
+      <div className='w-screen h-screen fixed top-0 left-0 p-8  z-30 bg-bg'>
         <Link
           className='h-full w-full bg-black/50 backdrop-blur top-0 left-0 absolute'
-          href='/news'
+          href='/calendar'
         />
         <div className='bg-bg/80 backdrop-blur border rounded-lg border-accent overflow-y-auto h-full w-full relative'>
-          <button className='sticky top-2 left-[calc(100%-40px)] rounded-lg bg-accent2 hover:bg-accent transition-colors duration-200 aspect-square h-8 w-8'>
-            <Link href='/news'>
+          <button className='sticky top-2 left-[calc(100%-40px)] rounded-lg bg-accent2 hover:bg-accent transition-colors duration-200 aspect-square h-8 w-8 z-20'>
+            <Link href='/calendar'>
               <X className='h-full w-full invert'></X>
             </Link>
           </button>
+          <div className='relative h-[50%] -mt-[40px]'>
+            <BannerFrame banner={eventData.banner!} />
+          </div>
+          <h2 className='heading-strip !pt-0 !mt-0'>{eventData.title}</h2>
           <Section>
-            <h2 className='text-h1'>{eventData.title}</h2>
             {eventData.subtitle && <div>{eventData.subtitle}</div>}
           </Section>
           <Section className='mt-8'>

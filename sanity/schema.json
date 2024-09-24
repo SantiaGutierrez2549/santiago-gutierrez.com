@@ -190,6 +190,175 @@
     }
   },
   {
+    "name": "instrument",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "instrument"
+          }
+        },
+        "type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "standard"
+              },
+              {
+                "type": "string",
+                "value": "custom"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "customInstrument": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "standardInstrument": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "Open Instrumentation"
+              },
+              {
+                "type": "string",
+                "value": "Symphonic Percussion"
+              },
+              {
+                "type": "string",
+                "value": "Hand Percussion"
+              },
+              {
+                "type": "string",
+                "value": "Snare"
+              },
+              {
+                "type": "string",
+                "value": "Piano"
+              },
+              {
+                "type": "string",
+                "value": "Clarinet"
+              },
+              {
+                "type": "string",
+                "value": "Flute"
+              },
+              {
+                "type": "string",
+                "value": "Oboe"
+              },
+              {
+                "type": "string",
+                "value": "Bassoon"
+              },
+              {
+                "type": "string",
+                "value": "Trumpet"
+              },
+              {
+                "type": "string",
+                "value": "Horn"
+              },
+              {
+                "type": "string",
+                "value": "Trombone"
+              },
+              {
+                "type": "string",
+                "value": "Tuba"
+              },
+              {
+                "type": "string",
+                "value": "Violin"
+              },
+              {
+                "type": "string",
+                "value": "Viola"
+              },
+              {
+                "type": "string",
+                "value": "Cello"
+              },
+              {
+                "type": "string",
+                "value": "Contrabass"
+              },
+              {
+                "type": "string",
+                "value": "Drumset"
+              },
+              {
+                "type": "string",
+                "value": "Guitar"
+              },
+              {
+                "type": "string",
+                "value": "Saxophone"
+              },
+              {
+                "type": "string",
+                "value": "Voice"
+              },
+              {
+                "type": "string",
+                "value": "Soprano"
+              },
+              {
+                "type": "string",
+                "value": "Mezzo-Soprano"
+              },
+              {
+                "type": "string",
+                "value": "Alto"
+              },
+              {
+                "type": "string",
+                "value": "Tenor"
+              },
+              {
+                "type": "string",
+                "value": "Baritone"
+              },
+              {
+                "type": "string",
+                "value": "Bass"
+              },
+              {
+                "type": "string",
+                "value": "Countertenor"
+              },
+              {
+                "type": "string",
+                "value": "Electronics"
+              },
+              {
+                "type": "string",
+                "value": "Orchestra"
+              }
+            ]
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "workInfo",
     "type": "type",
     "value": {
@@ -1082,51 +1251,28 @@
           "of": {
             "type": "object",
             "attributes": {
-              "title": {
+              "_ref": {
                 "type": "objectAttribute",
                 "value": {
                   "type": "string"
-                },
-                "optional": true
+                }
               },
-              "subtitle": {
+              "_type": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
-                },
-                "optional": true
+                  "type": "string",
+                  "value": "reference"
+                }
               },
-              "info": {
+              "_weak": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "inline",
-                  "name": "content"
-                },
-                "optional": true
-              },
-              "date": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "place": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "banner": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "inline",
-                  "name": "bannerInfo"
+                  "type": "boolean"
                 },
                 "optional": true
               }
             },
+            "dereferencesTo": "news",
             "rest": {
               "type": "object",
               "attributes": {
@@ -1209,61 +1355,41 @@
         "value": {
           "type": "array",
           "of": {
-            "type": "union",
-            "of": [
-              {
-                "type": "object",
-                "attributes": {
-                  "_ref": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "reference"
-                    }
-                  },
-                  "_weak": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "boolean"
-                    },
-                    "optional": true
-                  }
-                },
-                "dereferencesTo": "events"
+            "type": "object",
+            "attributes": {
+              "_ref": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
               },
-              {
-                "type": "object",
-                "attributes": {
-                  "_ref": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "reference"
-                    }
-                  },
-                  "_weak": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "boolean"
-                    },
-                    "optional": true
-                  }
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "reference"
+                }
+              },
+              "_weak": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
                 },
-                "dereferencesTo": "posts"
+                "optional": true
               }
-            ]
+            },
+            "dereferencesTo": "news",
+            "rest": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           }
         },
         "optional": true
@@ -1872,6 +1998,68 @@
         },
         "optional": true
       },
+      "bannerEvents": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "asset": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "object",
+                "attributes": {
+                  "_ref": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "_type": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string",
+                      "value": "reference"
+                    }
+                  },
+                  "_weak": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "boolean"
+                    },
+                    "optional": true
+                  }
+                },
+                "dereferencesTo": "sanity.imageAsset"
+              },
+              "optional": true
+            },
+            "hotspot": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageHotspot"
+              },
+              "optional": true
+            },
+            "crop": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageCrop"
+              },
+              "optional": true
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "image"
+              }
+            }
+          }
+        },
+        "optional": true
+      },
       "bioShort": {
         "type": "objectAttribute",
         "value": {
@@ -2193,6 +2381,10 @@
             {
               "type": "string",
               "value": "Arrangements & Orchestrations"
+            },
+            {
+              "type": "string",
+              "value": "Solo"
             }
           ]
         },
@@ -2203,121 +2395,19 @@
         "value": {
           "type": "array",
           "of": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "Open Instrumentation"
-              },
-              {
-                "type": "string",
-                "value": "Symphonic Percussion"
-              },
-              {
-                "type": "string",
-                "value": "Hand Percussion"
-              },
-              {
-                "type": "string",
-                "value": "Clarinet"
-              },
-              {
-                "type": "string",
-                "value": "Flute"
-              },
-              {
-                "type": "string",
-                "value": "Oboe"
-              },
-              {
-                "type": "string",
-                "value": "Bassoon"
-              },
-              {
-                "type": "string",
-                "value": "Trumpet"
-              },
-              {
-                "type": "string",
-                "value": "Horn"
-              },
-              {
-                "type": "string",
-                "value": "Trombone"
-              },
-              {
-                "type": "string",
-                "value": "Tuba"
-              },
-              {
-                "type": "string",
-                "value": "Violin"
-              },
-              {
-                "type": "string",
-                "value": "Viola"
-              },
-              {
-                "type": "string",
-                "value": "Cello"
-              },
-              {
-                "type": "string",
-                "value": "Contrabass"
-              },
-              {
-                "type": "string",
-                "value": "Drumset"
-              },
-              {
-                "type": "string",
-                "value": "Guitar"
-              },
-              {
-                "type": "string",
-                "value": "Saxophone"
-              },
-              {
-                "type": "string",
-                "value": "Voice"
-              },
-              {
-                "type": "string",
-                "value": "Soprano"
-              },
-              {
-                "type": "string",
-                "value": "Mezzo-Soprano"
-              },
-              {
-                "type": "string",
-                "value": "Alto"
-              },
-              {
-                "type": "string",
-                "value": "Tenor"
-              },
-              {
-                "type": "string",
-                "value": "Baritone"
-              },
-              {
-                "type": "string",
-                "value": "Bass"
-              },
-              {
-                "type": "string",
-                "value": "Countertenor"
-              },
-              {
-                "type": "string",
-                "value": "Electronics"
-              },
-              {
-                "type": "string",
-                "value": "Orchestra"
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
               }
-            ]
+            },
+            "rest": {
+              "type": "inline",
+              "name": "instrument"
+            }
           }
         },
         "optional": true
@@ -2355,7 +2445,7 @@
     }
   },
   {
-    "name": "posts",
+    "name": "news",
     "type": "document",
     "attributes": {
       "_id": {
@@ -2368,7 +2458,7 @@
         "type": "objectAttribute",
         "value": {
           "type": "string",
-          "value": "posts"
+          "value": "news"
         }
       },
       "_createdAt": {
@@ -2411,85 +2501,20 @@
         },
         "optional": false
       },
-      "date": {
+      "newsType": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "banner": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "bannerInfo"
-        },
-        "optional": true
-      },
-      "content": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "content"
-        },
-        "optional": false
-      }
-    }
-  },
-  {
-    "name": "events",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "events"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
-      "subtitle": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "post"
+            },
+            {
+              "type": "string",
+              "value": "event"
+            }
+          ]
         },
         "optional": false
       },
@@ -2514,7 +2539,7 @@
           "type": "inline",
           "name": "content"
         },
-        "optional": true
+        "optional": false
       }
     }
   },

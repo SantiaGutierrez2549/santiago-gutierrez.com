@@ -46,6 +46,13 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Instrument = {
+  _type: "instrument";
+  type?: "standard" | "custom";
+  customInstrument?: string;
+  standardInstrument?: "Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Snare" | "Piano" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics" | "Orchestra";
+};
+
 export type WorkInfo = {
   _type: "workInfo";
   name?: string;
@@ -116,11 +123,11 @@ export type Description = {
   level?: number;
 };
 
-export type Content = Array<({
+export type Content = Array<{
   _key: string;
-} & Description) | ({
+} & Description | {
   _key: string;
-} & AssetInfo)>;
+} & AssetInfo>;
 
 export type ImageInfo = {
   _type: "imageInfo";
@@ -185,13 +192,11 @@ export type Home = {
     _type: "image";
   };
   upcomingWorks?: Array<{
-    title?: string;
-    subtitle?: string;
-    info?: Content;
-    date?: string;
-    place?: string;
-    banner?: BannerInfo;
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
     _key: string;
+    [internalGroqTypeReferenceTo]?: "news";
   }>;
   highlightsBackground?: {
     asset?: {
@@ -208,12 +213,8 @@ export type Home = {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "events";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "posts";
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "news";
   }>;
   featuredWorks?: Array<{
     _ref: string;
@@ -314,6 +315,17 @@ export type About = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  bannerEvents?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   bioShort: Array<{
     _key: string;
   } & Description>;
@@ -366,40 +378,29 @@ export type Projects = {
   title: string;
   subtitle?: string;
   slug: Slug;
-  type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations";
-  instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics" | "Orchestra">;
+  type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations" | "Solo";
+  instrumentation?: Array<{
+    _key: string;
+  } & Instrument>;
   date: string;
   duration?: string;
   banner?: BannerInfo;
   content?: Content;
 };
 
-export type Posts = {
+export type News = {
   _id: string;
-  _type: "posts";
+  _type: "news";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title: string;
   subtitle?: string;
   slug: Slug;
+  newsType: "post" | "event";
   date: string;
   banner?: BannerInfo;
   content: Content;
-};
-
-export type Events = {
-  _id: string;
-  _type: "events";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  subtitle?: string;
-  slug: Slug;
-  date: string;
-  banner?: BannerInfo;
-  content?: Content;
 };
 
 export type SanityImageCrop = {
@@ -541,7 +542,7 @@ export type HslaColor = {
   a?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | WorkInfo | RawAssetInfo | Description | Content | ImageInfo | AssetInfo | Home | Settings | FontInfo | About | Projects | Posts | Events | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | BannerInfo | Slug | Color | RgbaColor | HsvaColor | HslaColor;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Instrument | WorkInfo | RawAssetInfo | Description | Content | ImageInfo | AssetInfo | Home | Settings | FontInfo | About | Projects | News | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | BannerInfo | Slug | Color | RgbaColor | HsvaColor | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: queries/index.ts
 // Variable: settingsQuery
@@ -585,7 +586,7 @@ export type SocialsQueryResult = {
   }> | null;
 } | null;
 // Variable: postsQuery
-// Query: *[_type == 'posts']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}
+// Query: *[_type == 'news' && newsType == 'post']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}
 export type PostsQueryResult = Array<{
   _id: string;
   title: string;
@@ -597,7 +598,7 @@ export type PostsQueryResult = Array<{
   content: Content;
 }>;
 // Variable: postQuery
-// Query: *[_type == 'posts' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }
+// Query: *[_type == 'news' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }
 export type PostQueryResult = {
   _id: string;
   title: string;
@@ -609,7 +610,7 @@ export type PostQueryResult = {
   content: Content;
 } | null;
 // Variable: eventsQuery
-// Query: *[_type == 'events']{_id, 'slug': slug.current, title, subtitle, banner, date, 'category': category->slug.current}
+// Query: *[_type == 'news' && newsType == 'event']{_id, 'slug': slug.current, title, subtitle, banner, date, 'category': category->slug.current}
 export type EventsQueryResult = Array<{
   _id: string;
   slug: string;
@@ -620,13 +621,13 @@ export type EventsQueryResult = Array<{
   category: null;
 }>;
 // Variable: eventQuery
-// Query: *[_type == 'events' && slug.current == $slug][0]{  _id, title, subtitle, banner, content, date, 'slug': slug.current, 'category': category->slug.current}
+// Query: *[_type == 'news' && slug.current == $slug][0]{  _id, title, subtitle, banner, content, date, 'slug': slug.current, 'category': category->slug.current}
 export type EventQueryResult = {
   _id: string;
   title: string;
   subtitle: string | null;
   banner: BannerInfo | null;
-  content: Content | null;
+  content: Content;
   date: string;
   slug: string;
   category: null;
@@ -642,8 +643,10 @@ export type ProjectsQueryResult = Array<{
   title: string;
   subtitle?: string;
   slug: string;
-  type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
-  instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
+  type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Solo" | "Vocal";
+  instrumentation?: Array<{
+    _key: string;
+  } & Instrument>;
   date: string;
   duration?: string;
   banner?: BannerInfo;
@@ -697,6 +700,17 @@ export type AboutQueryResult = {
     _type: "image";
   };
   bannerNews?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  bannerEvents?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -796,6 +810,17 @@ export type AboutSelectQueryResult = {
       crop?: SanityImageCrop;
       _type: "image";
     };
+    bannerEvents?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
     bioShort: Array<{
       _key: string;
     } & Description>;
@@ -840,7 +865,7 @@ export type AboutSelectQueryResult = {
   }> | null;
 };
 // Variable: homeQuery
-// Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]-> }
+// Query: *[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]->, 'upcomingWorks': upcomingWorks[]-> }
 export type HomeQueryResult = {
   _id: string;
   _type: "home";
@@ -859,15 +884,20 @@ export type HomeQueryResult = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  upcomingWorks?: Array<{
-    title?: string;
+  upcomingWorks: Array<{
+    _id: string;
+    _type: "news";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    title: string;
     subtitle?: string;
-    info?: Content;
-    date?: string;
-    place?: string;
+    slug: Slug;
+    newsType: "event" | "post";
+    date: string;
     banner?: BannerInfo;
-    _key: string;
-  }>;
+    content: Content;
+  }> | null;
   highlightsBackground?: {
     asset?: {
       _ref: string;
@@ -881,25 +911,14 @@ export type HomeQueryResult = {
   };
   highlights: Array<{
     _id: string;
-    _type: "events";
+    _type: "news";
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     title: string;
     subtitle?: string;
     slug: Slug;
-    date: string;
-    banner?: BannerInfo;
-    content?: Content;
-  } | {
-    _id: string;
-    _type: "posts";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title: string;
-    subtitle?: string;
-    slug: Slug;
+    newsType: "event" | "post";
     date: string;
     banner?: BannerInfo;
     content: Content;
@@ -913,8 +932,10 @@ export type HomeQueryResult = {
     title: string;
     subtitle?: string;
     slug: Slug;
-    type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
-    instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
+    type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Solo" | "Vocal";
+    instrumentation?: Array<{
+      _key: string;
+    } & Instrument>;
     date: string;
     duration?: string;
     banner?: BannerInfo;
@@ -928,14 +949,14 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'settings'][0]": SettingsQueryResult;
     "*[_type == 'about']{socials}[0]": SocialsQueryResult;
-    "*[_type == 'posts']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}": PostsQueryResult;
-    "*[_type == 'posts' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }": PostQueryResult;
-    "*[_type == 'events']{_id, 'slug': slug.current, title, subtitle, banner, date, 'category': category->slug.current}": EventsQueryResult;
-    "*[_type == 'events' && slug.current == $slug][0]{\n  _id, title, subtitle, banner, content, date, 'slug': slug.current, 'category': category->slug.current\n}": EventQueryResult;
+    "*[_type == 'news' && newsType == 'post']{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content}": PostsQueryResult;
+    "*[_type == 'news' && slug.current == $slug][0]{_id, title, banner, 'slug': slug.current, subtitle, date, 'category': category->slug.current, content }": PostQueryResult;
+    "*[_type == 'news' && newsType == 'event']{_id, 'slug': slug.current, title, subtitle, banner, date, 'category': category->slug.current}": EventsQueryResult;
+    "*[_type == 'news' && slug.current == $slug][0]{\n  _id, title, subtitle, banner, content, date, 'slug': slug.current, 'category': category->slug.current\n}": EventQueryResult;
     "*[_type == 'projects']{\n  ..., 'slug': slug.current\n}": ProjectsQueryResult;
     "*[_type == 'projects' && slug.current == $slug][0]{\n  _id, title, subtitle, banner, date, 'slug': slug.current, 'category': category->slug.current, content\n}": ProjectQueryResult;
     "*[_type == 'about'][0]": AboutQueryResult;
     "{ 'value': *[_type == 'about'][0][$key] }": AboutSelectQueryResult;
-    "*[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]-> }": HomeQueryResult;
+    "*[_type == 'home'][0]{ ..., 'highlights': highlights[]->, 'featuredWorks': featuredWorks[]->, 'upcomingWorks': upcomingWorks[]-> }": HomeQueryResult;
   }
 }
