@@ -2334,7 +2334,7 @@
         "value": {
           "type": "string"
         },
-        "optional": false
+        "optional": true
       },
       "banner": {
         "type": "objectAttribute",

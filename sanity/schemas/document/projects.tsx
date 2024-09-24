@@ -2,6 +2,7 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 const project = defineType({
   name: 'projects',
+  title: 'Works',
   type: 'document',
   fields: [
     defineField({
@@ -78,8 +79,7 @@ const project = defineType({
     }),
     defineField({
       name: 'duration',
-      type: 'string',
-      validation: rule => rule.required()
+      type: 'string'
     }),
     defineField({
       name: 'banner',

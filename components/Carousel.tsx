@@ -15,8 +15,6 @@ export default function CarouselComponent({
     })
   }, [index])
 
-  console.log('index', index)
-
   return (
     <div className='w-full relative'>
       <div

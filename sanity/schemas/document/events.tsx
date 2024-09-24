@@ -2,6 +2,7 @@ import { defineArrayMember, defineType, defineField } from 'sanity'
 
 const event = defineType({
   name: 'events',
+  title: 'News - Events',
   type: 'document',
   fields: [
     defineField({

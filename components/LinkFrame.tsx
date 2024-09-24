@@ -15,8 +15,8 @@ export default function LinkFrame({
   className?: string
   innerClassName?: string
   href?: string
-  title: string
-  subtitle: string | null
+  title?: string
+  subtitle?: string | null
   banner?: BannerInfo | null
   style?: React.CSSProperties
 } & React.PropsWithChildren) {
@@ -26,8 +26,8 @@ export default function LinkFrame({
         {href && (
           <Link className='absolute top-0 left-0 h-full w-full' href={href} />
         )}
-        <h2 className='text-h3'>{title}</h2>
-        <div className='text-base'>{subtitle}</div>
+        {title && <h2 className='text-h3'>{title}</h2>}
+        {subtitle && <div className='text-base'>{subtitle}</div>}
         {banner && <BannerFrame banner={banner} />}
         {children}
       </div>

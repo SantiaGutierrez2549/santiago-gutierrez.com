@@ -369,7 +369,7 @@ export type Projects = {
   type: "Orchestra" | "Chamber" | "Vocal" | "Arrangements & Orchestrations";
   instrumentation?: Array<"Open Instrumentation" | "Symphonic Percussion" | "Hand Percussion" | "Clarinet" | "Flute" | "Oboe" | "Bassoon" | "Trumpet" | "Horn" | "Trombone" | "Tuba" | "Violin" | "Viola" | "Cello" | "Contrabass" | "Drumset" | "Guitar" | "Saxophone" | "Voice" | "Soprano" | "Mezzo-Soprano" | "Alto" | "Tenor" | "Baritone" | "Bass" | "Countertenor" | "Electronics" | "Orchestra">;
   date: string;
-  duration: string;
+  duration?: string;
   banner?: BannerInfo;
   content?: Content;
 };
@@ -645,7 +645,7 @@ export type ProjectsQueryResult = Array<{
   type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
   instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
   date: string;
-  duration: string;
+  duration?: string;
   banner?: BannerInfo;
   content?: Content;
 }>;
@@ -916,7 +916,7 @@ export type HomeQueryResult = {
     type: "Arrangements & Orchestrations" | "Chamber" | "Orchestra" | "Vocal";
     instrumentation?: Array<"Alto" | "Baritone" | "Bass" | "Bassoon" | "Cello" | "Clarinet" | "Contrabass" | "Countertenor" | "Drumset" | "Electronics" | "Flute" | "Guitar" | "Hand Percussion" | "Horn" | "Mezzo-Soprano" | "Oboe" | "Open Instrumentation" | "Orchestra" | "Saxophone" | "Soprano" | "Symphonic Percussion" | "Tenor" | "Trombone" | "Trumpet" | "Tuba" | "Viola" | "Violin" | "Voice">;
     date: string;
-    duration: string;
+    duration?: string;
     banner?: BannerInfo;
     content?: Content;
   }> | null;
