@@ -4,3 +4,6 @@ assets
 sanity/dist
 sanity/.sanity
 .next
+.DS_Store
+app/.DS_Store
+sanity/.DS_Store
