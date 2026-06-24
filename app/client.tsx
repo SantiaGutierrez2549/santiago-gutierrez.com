@@ -11,8 +11,6 @@ const noise3D = createNoise3D()
 const noise2D = createNoise2D()
 export default function Client() {
   type Context = ReactiveContext<{}, { randomWidths: number[][] }>
-  const yCount = 10
-  const xCount = window.innerWidth
   return (
     <Reactive className='h-[120px] w-screen z-10 relative'>
       <Processing
@@ -20,6 +18,8 @@ export default function Client() {
         type='p2d'
         className='!h-full !w-full absolute top-0 left-0'
         setup={(p, { props }: Context) => {
+          const yCount = 10
+          const xCount = window.innerWidth
           const generateThickness = (x, y) => {
             return (noise2D(x / 100, y) / 2 + 0.5) * 0.7 + 0.5
           }
@@ -46,6 +46,8 @@ export default function Client() {
           })
         }}
         draw={(p, { time, props }: Context) => {
+          const yCount = 10
+          const xCount = window.innerWidth
           p.clear()
           p.noFill()
           p.colorMode(p.HSL, 1)

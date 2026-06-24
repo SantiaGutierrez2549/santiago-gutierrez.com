@@ -94,7 +94,7 @@ export default async function Home() {
         <div className='w-full'>
           {homeInfo.featuredWorks?.map(work => {
             return (
-              <div className='relative h-[400px] sm:flex'>
+              <div className='relative h-[400px] sm:flex' key={work._id}>
                 <Link
                   href={`/works/${work.type}/${work.slug.current}`}
                   className='h-full w-full absolute top-0 left-0'
