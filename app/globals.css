@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   p {
-    @apply my-2 font-body text-base;
+    margin: 0.5rem 0;
+    font-family: var(--body);
+    font-size: 18px;
   }
 
   h1,
@@ -13,17 +13,19 @@
   h4,
   h5,
   h6 {
-    @apply font-heading leading-h;
+    font-family: var(--heading);
+    line-height: 1.5em;
   }
 
   h3 {
-    @apply text-h3;
+    font-size: 2rem;
   }
 }
 
 @layer components {
   .textBox {
-    @apply w-full p-4 bg-bg2/80 backdrop-blur my-2 rounded-xl;
+    @apply w-full p-4 backdrop-blur rounded-xl my-2;
+    background-color: rgb(var(--bg2) / 0.8);
   }
 
   .section {
@@ -31,19 +33,29 @@
   }
 
   .circle {
-    @apply rounded-full bg-gradient-to-br from-slate-600 to-slate-800 shadow-lg transition-[transform,filter] duration-500 flex items-center justify-center hover:scale-125 hover:brightness-125;
+    @apply rounded-full bg-gradient-to-br from-slate-600 to-slate-800 shadow-lg duration-500 flex items-center justify-center hover:scale-125 hover:brightness-125;
+    transition-property: transform, filter;
   }
 
   .button {
-    @apply p-2 rounded-lg bg-accent2 text-bg font-heading;
+    @apply p-2 rounded-lg;
+    background-color: rgb(var(--accent2));
+    font-family: var(--heading);
+    color: rgb(var(--bg));
   }
 
   .accent-button {
-    @apply rounded-lg bg-accent2 hover:bg-accent transition-colors duration-200 aspect-square h-8 w-8;
+    @apply rounded-lg hover:transition-colors duration-200 aspect-square h-8 w-8;
+    background-color: rgb(var(--accent2));
+  }
+
+  .accent-button:hover {
+    background-color: rgb(var(--accent));
   }
 
   .heading {
-    @apply text-fg tracking-wide;
+    @apply tracking-wide;
+    color: rgb(var(--fg));
   }
 
   .heading-accent {
@@ -51,22 +63,25 @@
   }
 
   .heading-strip {
-    @apply text-h2 text-center bg-bgDark text-bg;
-  }
-}
-
-@layer utilities {
-  .scrollbar-none::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-none {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
+    @apply text-center;
+    background-color: rgb(var(--bgDark));
+    font-size: 2.5rem;
   }
 
-  .feathered {
-    mask-image: radial-gradient(
-      rgba(0, 0, 0, 1) 0% rgba(0, 0, 0, 1) 90% rgba(0, 0, 0, 0) 100%
-    );
+  @layer utilities {
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      /* Internet Explorer 10+ */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .feathered {
+      mask-image: radial-gradient(rgba(0, 0, 0, 1) 0% rgba(0, 0, 0, 1) 90% rgba(0, 0, 0, 0) 100%);
+    }
   }
 }
