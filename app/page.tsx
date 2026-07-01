@@ -66,7 +66,7 @@ export default async function Home() {
           {homeInfo.highlights!.map((x, i) => (
             <div
               key={x._id}
-              className={`aspect-square bg-bgDark/50 backdrop-blur rounded-lg p-4 relative flex flex-col`}>
+              className={`aspect-square bg-bgDark/30 backdrop-blur rounded-lg p-4 relative flex flex-col`}>
               {x.banner && (
                 <BannerFrame noHeight banner={x.banner} className='mb-4' />
               )}
@@ -87,15 +87,15 @@ export default async function Home() {
           {homeInfo.featuredWorks?.map(work => {
             return (
               <div
-                className='relative h-[400px] sm:flex bg-bgDark/50 rounded-lg p-4'
+                className='relative h-[400px] sm:flex bg-bgDark/20 rounded-lg p-4'
                 key={work._id}>
                 <Link
                   href={`/works/${work.type}/${work.slug.current}`}
                   className='h-full w-full absolute top-0 left-0'
                 />
-                <div className='px-4 space-x-3 py-3'>
-                  <div className='flex-none w-fit'>{work.title}</div>
-                  <div className='flex-none w-fit italic'>{work.subtitle}</div>
+                <div className='px-4 py-3'>
+                  <h2 className='text-2xl font-bold'>{work.title}</h2>
+                  <h3 className='text-base'>{work.subtitle!}</h3>
                 </div>
                 <div className='sm:!pl-8'>
                   <SanityImageWrapper

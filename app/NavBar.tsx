@@ -20,34 +20,34 @@ export default function NavBar({
   return (
     <>
       <nav className='sticky top-0 w-full z-30 bg-bgDark text-fgDark backdrop-blur-sm'>
-        <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center md:flex hidden'>
+        <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center md:flex hidden overflow-x-auto'>
           <Link
             href='/'
-            className='text-[32px] font-heading tracking-wide whitespace-nowrap'>
+            className='text-2xl font-heading tracking-wide whitespace-nowrap '>
             {title}
           </Link>
           <div className='grow'></div>
-          <Link href='/' className={`heading text-fgDark`}>
+          <Link href='/' className={`heading text-fgDark hover:font-bold`}>
             Home
           </Link>
           <Link
             href='/works'
-            className={`${segment === 'works' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'works' ? 'heading-accent' : 'heading'} text-fgDark hover:font-bold`}>
             Works
           </Link>
           <Link
             href='/about'
-            className={`${segment === 'about' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'about' ? 'heading-accent' : 'heading'} text-fgDark hover:font-bold`}>
             About
           </Link>
           <Link
             href='/news'
-            className={`${segment === 'news' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'news' ? 'heading-accent' : 'heading'} text-fgDark hover:font-bold`}>
             News
           </Link>
           <Link
             href='/calendar'
-            className={`${segment === 'calendar' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'calendar' ? 'heading-accent' : 'heading'} text-fgDark hover:font-bold`}>
             Calendar
           </Link>
           <Socials socials={socials} />
@@ -56,9 +56,12 @@ export default function NavBar({
           </button>
         </div>
         <div
-          className='md:hidden absolute top-0 left-0 p-2 !cursor-pointer'
+          className='md:hidden absolute top-0 left-0 p-1 !cursor-pointer bg-bgDark/50 rounded-lg m-1'
           onClick={() => setNav(!nav)}>
-          <MenuIcon className='invert' />
+          <MenuIcon className='' />
+        </div>
+        <div className='md:hidden absolute top-0 right-0 p-1 !cursor-pointer m-1 drop-shadow-md'>
+          {title}
         </div>
       </nav>
       {nav && (
@@ -66,7 +69,7 @@ export default function NavBar({
           className='sm:hidden flex h-screen w-screen backdrop-blur-sm fixed top-0 left-0 flex-col justify-around items-center z-40 bg-bgDark/70 text-fgDark'
           onClick={() => setNav(false)}>
           <div
-            className='absolute top-0 left-0 p-2 !cursor-pointer'
+            className='absolute top-0 left-0 p-1 !cursor-pointer bg-bgDark/50 rounded-lg m-1'
             onClick={() => setNav(!nav)}>
             <MenuIcon className='' />
           </div>

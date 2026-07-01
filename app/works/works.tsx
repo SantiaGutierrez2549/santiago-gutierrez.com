@@ -53,7 +53,7 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
           )
           .map(project => (
             <div className='w-full sm:p-8 sm:py-2 p-2' key={project._id}>
-              <div className='p-4 w-full h-full relative rounded-lg bg-bg2/50 overflow-hidden'>
+              <div className='p-4 w-full h-full relative rounded-lg bg-bg2/50 overflow-hidden hover:bg-bg2/75 transition-all duration-300'>
                 <Link
                   scroll={false}
                   href={`/works/${project.type}/${project.slug}`}

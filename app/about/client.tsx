@@ -37,8 +37,8 @@ export default function Client({
           medium
         </button> */}
         <button
-          onClick={() => setBioState(2)}
-          className={`${bioState === 2 ? 'font-bold' : ''}`}>
+          onClick={() => setBioState(1)}
+          className={`${bioState === 1 ? 'font-bold' : ''}`}>
           long
         </button>
       </div>
