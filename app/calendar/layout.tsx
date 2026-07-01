@@ -29,35 +29,14 @@ export default async function Events({ children }) {
         />
       </div>
       <h2 className='heading-strip'>Calendar</h2>
-      <Section>
-        {sortBy(
-          events.filter(event => event.date >= today),
-          'date'
-        ).map(event => (
-          <LinkFrame
-            className='textBox'
-            key={event._id}
-            title={event.title}
-            subtitle={event.subtitle}
-            href={`calendar/${event.slug}`}>
-            <div className='flex justify-end'>
-              <div className='text-right pb-2'>
-                <DateFrame date={event.date} className='bg-fg text-bg' />
-              </div>
-            </div>
-          </LinkFrame>
-        ))}
-      </Section>
-      <h2 className='heading-strip'>Past Events</h2>
-      <Section>
-        {sortBy(
-          events.filter(event => event.date < today),
-          'date'
-        )
-          .slice(0, 50)
-          .map(event => (
+      <div className='w-full mx-auto max-w-4xl'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4'>
+          {sortBy(
+            events.filter(event => event.date >= today),
+            'date'
+          ).map(event => (
             <LinkFrame
-              className='textBox !bg-fg/70 !text-bg'
+              className='textBox'
               key={event._id}
               title={event.title}
               subtitle={event.subtitle}
@@ -69,7 +48,32 @@ export default async function Events({ children }) {
               </div>
             </LinkFrame>
           ))}
-      </Section>
+        </div>
+      </div>
+      <h2 className='heading-strip'>Past Events</h2>
+      <div className='w-full mx-auto max-w-4xl'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4'>
+          {sortBy(
+            events.filter(event => event.date < today),
+            'date'
+          )
+            .slice(0, 50)
+            .map(event => (
+              <LinkFrame
+                className='textBox !bg-fg/70 !text-bg'
+                key={event._id}
+                title={event.title}
+                subtitle={event.subtitle}
+                href={`calendar/${event.slug}`}>
+                <div className='flex justify-end'>
+                  <div className='text-right pb-2'>
+                    <DateFrame date={event.date} className='bg-fg text-bg' />
+                  </div>
+                </div>
+              </LinkFrame>
+            ))}
+        </div>
+      </div>
       {children}
     </>
   )

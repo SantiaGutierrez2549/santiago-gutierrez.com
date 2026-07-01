@@ -7,21 +7,21 @@ import { Hydra, Reactive } from 'reactive-frames'
 
 export default function Client({
   short,
-  medium,
+  // medium,
   long
 }: {
   short: ({
     _key: string
   } & Description)[]
-  medium: ({
-    _key: string
-  } & Description)[]
+  // medium: ({
+  //   _key: string
+  // } & Description)[]
   long: ({
     _key: string
   } & Description)[]
 }) {
   const [bioState, setBioState] = useState(0)
-  const bioList = [short, medium, long]
+  const bioList = [short, long]
   return (
     <>
       <PortableText value={bioList[bioState]} />
@@ -31,11 +31,11 @@ export default function Client({
           className={`${bioState === 0 ? 'font-bold' : ''}`}>
           short
         </button>
-        <button
+        {/* <button
           onClick={() => setBioState(1)}
           className={`${bioState === 1 ? 'font-bold' : ''}`}>
           medium
-        </button>
+        </button> */}
         <button
           onClick={() => setBioState(2)}
           className={`${bioState === 2 ? 'font-bold' : ''}`}>

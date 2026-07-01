@@ -19,7 +19,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className='w-full relative h-[calc(90vh-45px)] overflow-hidden'>
+      <div className='w-full relative h-[calc(90vh-45px)] overflow-hidden shadow-xl'>
         <SanityImageWrapper
           id={homeInfo.homeImage?.asset?._ref}
           className='w-full h-full object-cover'
@@ -27,7 +27,7 @@ export default async function Home() {
       </div>
 
       <Client>
-        <p className='text-fg backdrop-blur-xs rounded-xl px-3 py-2 text-[22px] inline-block w-fit relative z-10  sm:max-w-[75%]'>
+        <p className='text-fg backdrop-blur-sm bg-bg/75 rounded-xl px-3 py-2 text-[22px] inline-block w-fit relative z-50 sm:max-w-[75%]'>
           {homeInfo.slogan}
         </p>
       </Client>
@@ -62,16 +62,13 @@ export default async function Home() {
           id={homeInfo.highlightsBackground?.asset?._ref}
         />
 
-        <div className='space-y-8 sm:px-[10%] pt-12'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 sm:px-[10%] pt-12'>
           {homeInfo.highlights!.map((x, i) => (
             <div
               key={x._id}
-              className={`aspect-square w-[400px] max-w-full bg-bgDark/50 backdrop-blur rounded-lg p-4 relative flex flex-col`}
-              style={{
-                marginLeft: i % 2 === 0 ? 'max(0px, calc(100% - 400px))' : 0
-              }}>
+              className={`aspect-square bg-bgDark/50 backdrop-blur rounded-lg p-4 relative flex flex-col`}>
               {x.banner && (
-                <BannerFrame noHeight banner={x.banner} className='' />
+                <BannerFrame noHeight banner={x.banner} className='mb-4' />
               )}
 
               <h2 className='text-2xl font-bold'>{x.title}</h2>
@@ -85,16 +82,18 @@ export default async function Home() {
       </div>
 
       <h2 className='heading-strip'>Featured Work</h2>
-      <div className='w-full pt-8 px-4'>
+      <div className='w-full py-8 px-4'>
         <div className='w-full'>
           {homeInfo.featuredWorks?.map(work => {
             return (
-              <div className='relative h-[400px] sm:flex' key={work._id}>
+              <div
+                className='relative h-[400px] sm:flex bg-bgDark/50 rounded-lg p-4'
+                key={work._id}>
                 <Link
                   href={`/works/${work.type}/${work.slug.current}`}
                   className='h-full w-full absolute top-0 left-0'
                 />
-                <div className='px-4 space-x-3'>
+                <div className='px-4 space-x-3 py-3'>
                   <div className='flex-none w-fit'>{work.title}</div>
                   <div className='flex-none w-fit italic'>{work.subtitle}</div>
                 </div>

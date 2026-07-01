@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   p {
@@ -24,7 +26,7 @@
 
 @layer components {
   .textBox {
-    @apply w-full p-4 backdrop-blur rounded-xl my-2;
+    @apply w-full p-4 backdrop-blur rounded-xl;
     background-color: rgb(var(--bg2) / 0.8);
   }
 
@@ -64,8 +66,8 @@
   }
 
   .heading-strip {
-    @apply text-center;
-    background-color: rgb(var(--bgDark));
+    @apply text-center pb-2;
+    background: linear-gradient(rgb(var(--bgDark)) 85%, transparent);
     font-size: 2.5rem;
     color: rgb(var(--bg));
   }

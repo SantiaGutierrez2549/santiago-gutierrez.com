@@ -18,14 +18,14 @@ export default function Posts({ posts }: { posts: PostsQueryResult }) {
       {
         // Toggle between posts, so older ones can be loaded
       }
-      <div className='flex flex-wrap *:m-2 justify-center'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mx-auto max-w-7xl'>
         {sortBy(posts, post => post.date)
           .reverse()
           .slice(start, start + 10)
           .map((post, i) => (
             <div
               key={post._id}
-              className={`w-[300px] max-w-full bg-bgDark/50 backdrop-blur rounded-lg p-4 relative`}>
+              className={`bg-bgDark/50 backdrop-blur rounded-lg p-4 relative`}>
               <div className='text-right pb-2'>
                 <DateFrame date={post.date} />
               </div>

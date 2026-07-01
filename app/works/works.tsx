@@ -60,40 +60,43 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
                   title={project.title}
                   className='h-full w-full absolute top-0 left-0 z-10'
                 />
-                <div className='flex'>
-                  <div className='flex flex-col w-full h-full'>
-                    <h2 className='rounded-lg p-1 text-h2 backdrop-blur w-fit'>
-                      {project.title}
-                    </h2>
-                    <p className='rounded-lg p-1 italic backdrop-blur w-fit'>
-                      {project.subtitle}
-                    </p>
-                    <div className='flex space-x-2'>
-                      <div className='whitespace-nowrap'>
-                        {DateTime.fromISO(project.date!).toFormat('y')}
-                      </div>
-                      <div className=''>|</div>
-                      <div className='whitespace-nowrap'>
-                        {project.duration}
+                <div className='flex flex-col w-full h-full'>
+                  <h2 className='rounded-lg p-1 text-h2 backdrop-blur w-fit'>
+                    {project.title}
+                  </h2>
+                  <div className='flex gap-4 mt-2'>
+                    <div className='flex flex-col w-1/2'>
+                      <p className='rounded-lg p-1 italic backdrop-blur w-fit'>
+                        {project.subtitle}
+                      </p>
+                      <div className='flex space-x-2'>
+                        <div className='whitespace-nowrap'>
+                          {DateTime.fromISO(project.date!).toFormat('y')}
+                        </div>
+                        <div className=''>|</div>
+                        <div className='whitespace-nowrap'>
+                          {project.duration}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className='flex flex-wrap w-1/3 items-center justify-end'>
-                    {project.instrumentation?.map(instrument => {
-                      const title = (
-                        instrument.type === 'standard'
-                          ? instrument.standardInstrument
-                          : instrument.customInstrument
-                      )!
-                      return (
-                        <div
-                          className='rounded-lg bg-accent/50 h-fit px-2 py-1 mx-1 text-xs'
-                          onClick={() => setInstrumentFilter(title)}>
-                          {}
-                        </div>
-                      )
-                    })}
+                    <div className='flex flex-wrap w-1/2 items-center justify-end'>
+                      {project.instrumentation?.map(instrument => {
+                        const title = (
+                          instrument.type === 'standard'
+                            ? instrument.standardInstrument
+                            : instrument.customInstrument
+                        )!
+                        return (
+                          <div
+                            key={title}
+                            className='rounded-lg bg-accent/50 h-fit px-2 py-1 m-1 text-sm text-center'
+                            onClick={() => setInstrumentFilter(title)}>
+                            {title}
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>

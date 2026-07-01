@@ -4,6 +4,7 @@ import { settingsQuery, socialsQuery } from '@/sanity/queries'
 import { SettingsQueryResult, SocialsQueryResult } from '@/sanity/sanity-types'
 import type { Metadata } from 'next'
 import NavBar from './NavBar'
+// @ts-ignore
 import './globals.css'
 import Image from 'next/image'
 import SanityImageWrapper from '@/components/SanityImageWrapper'
