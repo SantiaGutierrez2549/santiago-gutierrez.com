@@ -72,7 +72,6 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
                       <div className='whitespace-nowrap'>
                         {DateTime.fromISO(project.date!).toFormat('y')}
                       </div>
-                      <div className=''>|</div>
                       <div className='whitespace-nowrap'>
                         {project.duration}
                       </div>
@@ -88,6 +87,7 @@ export default function Works({ projects }: { projects: ProjectsQueryResult }) {
                       )!
                       return (
                         <div
+                          key={instrument._key}
                           className='rounded-lg bg-accent/50 h-fit px-2 py-1 mx-1 text-xs'
                           onClick={() => setInstrumentFilter(title)}>
                           {}

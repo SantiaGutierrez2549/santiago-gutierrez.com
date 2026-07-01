@@ -4,9 +4,9 @@ import { settingsQuery, socialsQuery } from '@/sanity/queries'
 import { SettingsQueryResult, SocialsQueryResult } from '@/sanity/sanity-types'
 import type { Metadata } from 'next'
 import NavBar from './NavBar'
-import './globals.css'
 import Image from 'next/image'
 import SanityImageWrapper from '@/components/SanityImageWrapper'
+import './globals.css'
 
 export const runtime = 'edge'
 
@@ -25,7 +25,7 @@ export default async function RootLayout({
   const data = await sanityFetch<SettingsQueryResult>({ query: settingsQuery })
   const socials = await sanityFetch<SocialsQueryResult>({ query: socialsQuery })
 
-  const style = {
+  const styleVars = {
     '--bg': formatColor(data?.backgroundColor!),
     '--bg2': formatColor(data?.backgroundAltColor!),
     '--bgDark': formatColor(data?.backgroundDarkColor!),
@@ -39,7 +39,7 @@ export default async function RootLayout({
   } as React.CSSProperties
 
   return (
-    <html lang='en' style={style}>
+    <html lang='en' style={styleVars} suppressHydrationWarning>
       <head>
         {data?.bodyFont?.linkSource && (
           <link rel='stylesheet' href={data.bodyFont!.linkSource} />

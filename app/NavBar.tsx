@@ -19,7 +19,7 @@ export default function NavBar({
 
   return (
     <>
-      <nav className='sticky top-0 w-full z-30 bg-bgDark text-fgDark backdrop-blur-sm'>
+      <nav className='sticky top-0 w-full z-30 bg-bgDark  backdrop-blur-sm'>
         <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center md:flex hidden'>
           <Link
             href='/'
@@ -27,27 +27,27 @@ export default function NavBar({
             {title}
           </Link>
           <div className='grow'></div>
-          <Link href='/' className={`heading text-fgDark`}>
+          <Link href='/' className={`heading `}>
             Home
           </Link>
           <Link
             href='/works'
-            className={`${segment === 'works' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'works' ? 'accent' : ''} heading `}>
             Works
           </Link>
           <Link
             href='/about'
-            className={`${segment === 'about' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'about' ? 'accent' : ''} heading `}>
             About
           </Link>
           <Link
             href='/news'
-            className={`${segment === 'news' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'news' ? 'accent' : ''} heading `}>
             News
           </Link>
           <Link
             href='/calendar'
-            className={`${segment === 'calendar' ? 'heading-accent' : 'heading'} text-fgDark`}>
+            className={`${segment === 'calendar' ? 'accent' : ''} heading `}>
             Calendar
           </Link>
           <Socials socials={socials} />
@@ -56,49 +56,49 @@ export default function NavBar({
           </button>
         </div>
         <div
-          className='md:hidden absolute top-0 left-0 p-2 !cursor-pointer'
+          className='md:hidden absolute top-0 left-0 p-1 cursor-pointer! bg-black/50 backdrop-blur-sm rounded-lg z-50 m-1'
           onClick={() => setNav(!nav)}>
           <MenuIcon className='invert' />
         </div>
       </nav>
       {nav && (
         <div
-          className='sm:hidden flex h-screen w-screen backdrop-blur-sm fixed top-0 left-0 flex-col justify-around items-center z-40 bg-bgDark/70 text-fgDark'
+          className='sm:hidden flex h-screen w-screen backdrop-blur-sm fixed top-0 left-0 flex-col justify-around items-center z-40 bg-bgDark/70 '
           onClick={() => setNav(false)}>
           <div
-            className='absolute top-0 left-0 p-2 !cursor-pointer'
+            className='absolute top-0 left-0 p-1 cursor-pointer! bg-black/50 backdrop-blur-sm rounded-lg z-50 m-1'
             onClick={() => setNav(!nav)}>
-            <MenuIcon className='' />
+            <MenuIcon className='invert' />
           </div>
           <div className='h-[5%]'></div>
           <Link
             onClick={() => setNav(false)}
             href='/'
-            className={`block text-fgDark ${segment === '' ? 'heading-accent' : 'heading'}`}>
+            className={`block  ${segment === '' ? 'accent' : ''} heading`}>
             home
           </Link>
           <Link
             onClick={() => setNav(false)}
             href='/works'
-            className={`block text-fgDark ${segment === 'works' ? 'heading-accent' : 'heading'}`}>
+            className={`block  ${segment === 'works' ? 'accent' : ''} heading`}>
             works
           </Link>
           <Link
             onClick={() => setNav(false)}
             href='/about'
-            className={`block text-fgDark ${segment === 'about' ? 'heading-accent' : 'heading'}`}>
+            className={`block  ${segment === 'about' ? 'accent' : ''} heading`}>
             about
           </Link>
           <Link
             onClick={() => setNav(false)}
             href='/news'
-            className={`block text-fgDark ${segment === 'news' ? 'heading-accent' : 'heading'}`}>
+            className={`block  ${segment === 'news' ? 'accent' : ''} heading`}>
             news
           </Link>
           <Link
             onClick={() => setNav(false)}
             href='/calendar'
-            className={`block text-fgDark ${segment === 'calendar' ? 'heading-accent' : 'heading'}`}>
+            className={`block  ${segment === 'calendar' ? 'accent' : ''} heading`}>
             calendar
           </Link>
           <Socials socials={socials} />

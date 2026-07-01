@@ -29,7 +29,7 @@ export default async function Events({ children }) {
         />
       </div>
       <h2 className='heading-strip'>Calendar</h2>
-      <Section>
+      <Section innerClassName='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {sortBy(
           events.filter(event => event.date >= today),
           'date'
@@ -49,7 +49,7 @@ export default async function Events({ children }) {
         ))}
       </Section>
       <h2 className='heading-strip'>Past Events</h2>
-      <Section>
+      <Section innerClassName='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
         {sortBy(
           events.filter(event => event.date < today),
           'date'

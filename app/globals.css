@@ -54,13 +54,12 @@
   }
 
   .heading {
-    @apply tracking-wide;
-    color: rgb(var(--fg));
+    @apply tracking-wide inline-block rounded-lg bg-black/50 backdrop-blur relative p-2;
+    color: rgb(var(--bg));
   }
 
-  .heading-accent {
-    @apply tracking-wider;
-    color: rgb(var(--accent));
+  .accent {
+    color: rgb(var(--accent)) !important;
   }
 
   .heading-strip {

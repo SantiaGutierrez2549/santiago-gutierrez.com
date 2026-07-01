@@ -27,7 +27,9 @@ export default function LinkFrame({
           <Link className='absolute top-0 left-0 h-full w-full' href={href} />
         )}
         {title && <h2 className='text-h3'>{title}</h2>}
-        {subtitle && <div className='text-base'>{subtitle}</div>}
+        {subtitle && (
+          <div className='text-base italic font-body'>{subtitle}</div>
+        )}
         {banner && <BannerFrame banner={banner} />}
         {children}
       </div>

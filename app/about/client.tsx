@@ -31,11 +31,11 @@ export default function Client({
           className={`${bioState === 0 ? 'font-bold' : ''}`}>
           short
         </button>
-        <button
+        {/* <button
           onClick={() => setBioState(1)}
           className={`${bioState === 1 ? 'font-bold' : ''}`}>
           medium
-        </button>
+        </button> */}
         <button
           onClick={() => setBioState(2)}
           className={`${bioState === 2 ? 'font-bold' : ''}`}>

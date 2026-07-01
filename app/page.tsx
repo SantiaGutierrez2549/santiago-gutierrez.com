@@ -62,14 +62,11 @@ export default async function Home() {
           id={homeInfo.highlightsBackground?.asset?._ref}
         />
 
-        <div className='space-y-8 sm:px-[10%] pt-12'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 sm:px-[10%] pt-12'>
           {homeInfo.highlights!.map((x, i) => (
             <div
               key={x._id}
-              className={`aspect-square w-[400px] max-w-full bg-bgDark/50 backdrop-blur rounded-lg p-4 relative flex flex-col`}
-              style={{
-                marginLeft: i % 2 === 0 ? 'max(0px, calc(100% - 400px))' : 0
-              }}>
+              className={`aspect-square bg-bgDark/50 backdrop-blur rounded-lg p-4 relative flex flex-col`}>
               {x.banner && (
                 <BannerFrame noHeight banner={x.banner} className='' />
               )}
