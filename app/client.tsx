@@ -1,60 +1,70 @@
 'use client'
 
 import _ from 'lodash'
-import type { Image } from 'p5'
-import { Processing, Reactive } from 'reactive-frames'
-import { ReactiveContext } from 'reactive-frames/dist/types'
-import invariant from 'tiny-invariant'
 import { createNoise3D, createNoise2D } from 'simplex-noise'
+import { useEffect, useRef } from 'react'
+import type p5 from 'p5'
 
 const noise3D = createNoise3D()
 const noise2D = createNoise2D()
-export default function Client() {
-  type Context = ReactiveContext<{}, { randomWidths: number[][] }>
-  return (
-    <Reactive className='h-[120px] w-screen z-10 relative'>
-      <Processing
-        name='p'
-        type='p2d'
-        className='!h-full !w-full absolute top-0 left-0'
-        setup={(p, { props }: Context) => {
-          const yCount = 10
-          const xCount = window.innerWidth
-          const generateThickness = (x, y) => {
-            return (noise2D(x / 100, y) / 2 + 0.5) * 0.7 + 0.5
+
+export default function Client({ children }: { children?: React.ReactNode }) {
+  const canvasRef = useRef<HTMLDivElement>(null)
+  const p5InstanceRef = useRef<p5 | null>(null)
+
+  useEffect(() => {
+    const loadP5 = async () => {
+      const p5Module = await import('p5')
+      const p5 = p5Module.default
+
+      if (!canvasRef.current) return
+
+      const yCount = 10
+      const xCount = typeof window !== 'undefined' ? window.innerWidth : 1000
+      let startTime = Date.now()
+
+      // Pre-generate random widths
+      const generateThickness = (x: number, y: number) => {
+        return (noise2D(x / 100, y) / 2 + 0.5) * 0.7 + 0.5
+      }
+
+      const randomWidths = _.range(yCount).map(y => {
+        let breaks: number[] = []
+        let isLine = 0
+        let nextBreak = Math.random() * xCount
+        for (let i = 0; i < xCount; i++) {
+          if (i > nextBreak) {
+            isLine = isLine ? 0 : 1
+            nextBreak += !isLine
+              ? (Math.random() / 10) * xCount
+              : Math.random() * xCount
           }
-          // 12-15 lines that are making a waveish thing slowly
-          props.randomWidths = _.range(yCount).map(y => {
-            let breaks: number[] = []
-            let isLine = 0
-            let nextBreak = Math.random() * xCount
-            for (let i = 0; i < xCount; i++) {
-              if (i > nextBreak) {
-                isLine = isLine ? 0 : 1
-                nextBreak += !isLine
-                  ? (Math.random() / 10) * xCount
-                  : Math.random() * xCount
-              }
-              breaks.push(isLine ? generateThickness(i, y) : 0)
-            }
-            let overlap = 0
-            while (overlap < nextBreak - xCount) {
-              breaks[overlap] = generateThickness(overlap + xCount, y)
-              overlap++
-            }
-            return breaks
-          })
-        }}
-        draw={(p, { time, props }: Context) => {
-          const yCount = 10
-          const xCount = window.innerWidth
+          breaks.push(isLine ? generateThickness(i, y) : 0)
+        }
+        let overlap = 0
+        while (overlap < nextBreak - xCount) {
+          breaks[overlap] = generateThickness(overlap + xCount, y)
+          overlap++
+        }
+        return breaks
+      })
+
+      const containerHeight = canvasRef.current?.clientHeight || 120
+
+      const sketch = (p: p5) => {
+        p.setup = () => {
+          const width = typeof window !== 'undefined' ? window.innerWidth : 1000
+          p.createCanvas(width, containerHeight, p.P2D)
+        }
+
+        p.draw = () => {
+          const time = (Date.now() - startTime) / 1000
+
           p.clear()
           p.noFill()
           p.colorMode(p.HSL, 1)
 
           p.strokeWeight(5)
-          // add some stuff to the curves.
-          // make some noise with one line.
 
           const lastCurve = _.range(xCount).map(() => 0)
           const noise = _.range(xCount).map(
@@ -62,11 +72,9 @@ export default function Client() {
           )
 
           for (let y = 0; y < yCount; y++) {
-            // if (y <= 6) p.stroke('white')
-            // else
             p.stroke('black')
             const startIndex = Math.floor((((time / 10) * 4) % 1) * xCount)
-            const randomWeights = props.randomWidths[y]
+            const randomWeights = randomWidths[y]
             let x = startIndex
             for (let i = 0; i < xCount; i++) {
               x++
@@ -82,8 +90,38 @@ export default function Client() {
               )
             }
           }
-        }}
-      />
-    </Reactive>
+        }
+
+        p.windowResized = () => {
+          if (typeof window !== 'undefined') {
+            p.resizeCanvas(
+              window.innerWidth,
+              canvasRef.current?.clientHeight || 120
+            )
+          }
+        }
+      }
+
+      const instance = new p5(sketch, canvasRef.current)
+      p5InstanceRef.current = instance
+    }
+
+    loadP5()
+
+    return () => {
+      if (p5InstanceRef.current) {
+        p5InstanceRef.current.remove()
+        p5InstanceRef.current = null
+      }
+    }
+  }, [])
+
+  return (
+    <div
+      ref={canvasRef}
+      className='relative w-screen h-[min(75vh,300px)] z-10 flex 
+  justify-center items-center [&>canvas]:absolute [&>canvas]:inset-0 p-4'>
+      {children}
+    </div>
   )
 }

@@ -14,7 +14,10 @@
     "typegen": "cd sanity && sanity typegen generate"
   },
   "dependencies": {
+    "@portabletext/react": "^3.1.0",
     "@restart/ui": "^1.9.4",
+    "@sanity/preview-url-secret": "^1.6.21",
+    "@sanity/react-loader": "^1.10.15",
     "@tailwindcss/postcss": "^4.3.1",
     "@tailwindcss/typography": "^0.5.20",
     "@types/luxon": "^3.7.2",
@@ -28,10 +31,8 @@
     "mime-types": "^3.0.2",
     "next": "^15.0.0",
     "next-sanity": "^9.12.3",
-    "@portabletext/react": "^3.1.0",
-    "@sanity/preview-url-secret": "^1.6.21",
-    "@sanity/react-loader": "^1.10.15",
     "nodemailer": "^9.0.1",
+    "p5": "^2.3.0",
     "pts": "^0.12.9",
     "react": "^19.2.7",
     "react-bootstrap": "^2.10.10",

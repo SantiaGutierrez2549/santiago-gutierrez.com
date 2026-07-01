@@ -25,17 +25,12 @@ export default async function Home() {
           className='w-full h-full object-cover'
         />
       </div>
-      <Client />
-      <p className='text-fg text-center backdrop-blur rounded-xl p-1 text-[22px] w-full'>
-        {homeInfo.slogan}
-      </p>
-      <Client />
 
-      <p className='text-center'>
-        <a href='/about' className='underline  text-right'>
-          Read more...
-        </a>
-      </p>
+      <Client>
+        <p className='text-fg backdrop-blur-xs rounded-xl px-3 py-2 text-[22px] inline-block w-fit relative z-10  sm:max-w-[75%]'>
+          {homeInfo.slogan}
+        </p>
+      </Client>
 
       <h2 className='heading-strip'>Upcoming</h2>
       <Carousel>

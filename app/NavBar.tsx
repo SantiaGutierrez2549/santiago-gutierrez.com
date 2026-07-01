@@ -20,7 +20,7 @@ export default function NavBar({
   return (
     <>
       <nav className='sticky top-0 w-full z-30 bg-bgDark text-fgDark backdrop-blur-sm'>
-        <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center sm:flex hidden'>
+        <div className='w-full space-x-6 px-2 h-14 py-2 z-10 relative font-heading items-center md:flex hidden'>
           <Link
             href='/'
             className='text-[32px] font-heading tracking-wide whitespace-nowrap'>
@@ -56,7 +56,7 @@ export default function NavBar({
           </button>
         </div>
         <div
-          className='sm:hidden absolute top-0 left-0 p-2 !cursor-pointer'
+          className='md:hidden absolute top-0 left-0 p-2 !cursor-pointer'
           onClick={() => setNav(!nav)}>
           <MenuIcon className='invert' />
         </div>
