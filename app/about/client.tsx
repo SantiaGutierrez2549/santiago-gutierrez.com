@@ -3,7 +3,6 @@
 import { Description } from '@/sanity/sanity-types'
 import { PortableText } from '@portabletext/react'
 import { useState } from 'react'
-import { Hydra, Reactive } from 'reactive-frames'
 
 export default function Client({
   short,

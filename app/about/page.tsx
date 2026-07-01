@@ -55,7 +55,7 @@ export default async function About() {
 
           <Client
             short={about.bioShort}
-            medium={about.bioMedium}
+            // medium={about.bioMedium}
             long={about.bioLong}
           />
         </div>
