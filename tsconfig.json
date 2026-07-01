@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "noImplicitAny": false,
@@ -23,9 +19,7 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "target": "ES2017"
   },
@@ -38,10 +32,7 @@
     ".next/types/app/work/layout.tsx",
     ".next/types/app/work/page.tsx",
     ".next/types/app/layout.tsx",
-    ".next/types/app/page.tsx",
-    ".next/dev/types/**/*.ts"
+    ".next/types/app/page.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

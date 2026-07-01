@@ -1,6 +1,7 @@
 import SanityImageWrapper from '@/components/SanityImageWrapper'
 import Section from '@/components/Section'
 import ViewButton from '@/components/ViewButton'
+import { BASE_URL_IMAGES } from '@/sanity/env'
 import { sanityFetch } from '@/sanity/lib/fetch'
 import { aboutQuery, aboutSelectQuery } from '@/sanity/queries'
 import { sanityFileInfo } from '@/sanity/queries/utilities'
@@ -8,8 +9,6 @@ import { AboutQueryResult, AboutSelectQueryResult } from '@/sanity/sanity-types'
 import { PortableText } from '@portabletext/react'
 import invariant from 'tiny-invariant'
 import Client from './client'
-import BannerFrame from '@/components/BannerFrame'
-import { BASE_URL_IMAGES } from '@/sanity/env'
 
 export default async function About() {
   const about = await sanityFetch<AboutQueryResult>({ query: aboutQuery })

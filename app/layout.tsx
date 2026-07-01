@@ -9,7 +9,7 @@ import './globals.css'
 import Image from 'next/image'
 import SanityImageWrapper from '@/components/SanityImageWrapper'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
